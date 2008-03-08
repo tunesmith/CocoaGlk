@@ -292,9 +292,9 @@
 		4B4D379C0A97B53E0007FD80 /* GlkUcs4Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkUcs4Stream.h; sourceTree = "<group>"; };
 		4B4D379D0A97B53E0007FD80 /* GlkUcs4Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkUcs4Stream.m; sourceTree = "<group>"; };
 		4B51AA4707E8770600576AB9 /* GlkView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlkView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B51AA4807E8770600576AB9 /* GlkView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GlkView-Info.plist"; path = "/Users/ahunter/prog/CocoaGlk/GlkView-Info.plist"; sourceTree = "<absolute>"; };
+		4B51AA4807E8770600576AB9 /* GlkView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlkView-Info.plist"; sourceTree = "<group>"; };
 		4B51AA5607E877C900576AB9 /* GlkClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlkClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B51AA5707E877C900576AB9 /* GlkClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "GlkClient-Info.plist"; path = "/Users/ahunter/prog/CocoaGlk/GlkClient-Info.plist"; sourceTree = "<absolute>"; };
+		4B51AA5707E877C900576AB9 /* GlkClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlkClient-Info.plist"; sourceTree = "<group>"; };
 		4B51AA6A07E8785700576AB9 /* CocoaGlk.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = CocoaGlk.icns; path = Resources/CocoaGlk.icns; sourceTree = "<group>"; };
 		4B51AA6B07E8785700576AB9 /* GlkClient.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = GlkClient.icns; path = Resources/GlkClient.icns; sourceTree = "<group>"; };
 		4B51AA8707E8795300576AB9 /* GlkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkView.h; sourceTree = "<group>"; };
