@@ -6,7 +6,11 @@
 //  Copyright 2006 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#if defined(COCOAGLK_IPHONE)
+# include <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #import <GlkClient/GlkStreamProtocol.h>
 

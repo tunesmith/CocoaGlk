@@ -9,7 +9,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#import <Cocoa/Cocoa.h>
+#if defined(COCOAGLK_IPHONE)
+# include <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #import "GlkSessionProtocol.h"
 

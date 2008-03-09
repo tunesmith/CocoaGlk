@@ -6,7 +6,11 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#if defined(COCOAGLK_IPHONE)
+# include <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 //
 // Streams can also be accessed through the buffer (and usually are for writing)

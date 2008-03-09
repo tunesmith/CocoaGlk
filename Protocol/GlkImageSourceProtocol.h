@@ -6,7 +6,11 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#if defined(COCOAGLK_IPHONE)
+# include <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 //
 // When we have image resources, we need to be able to ask the client what they are. The client can provide

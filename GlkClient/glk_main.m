@@ -10,7 +10,11 @@
 // General Glk functions and routines that don't fit anywhere else
 //
 
-#import <Cocoa/Cocoa.h>
+#if defined(COCOAGLK_IPHONE)
+# include <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #include "glk.h"
 #include "cocoaglk.h"

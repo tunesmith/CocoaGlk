@@ -6,7 +6,11 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#if defined(COCOAGLK_IPHONE)
+# include <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #include "glk.h"
 #include "cocoaglk.h"
@@ -211,11 +215,19 @@ void glk_window_fill_rect(winid_t win, glui32 color,
 		return;
 	}
 	
+#if !defined(COCOAGLK_IPHONE)
 	// Create an NSColor from the color value
 	NSColor* fillColour = [NSColor colorWithDeviceRed: ((float)(color&0xff))/255.0
 												green: ((float)(color&0xff00))/65280.0
 												 blue: ((float)(color&0xff0000))/16711680.0
 												alpha: 1.0];
+#else
+	// Create a UIColor from the color value
+	UIColor* fillColour = [UIColor colorWithRed: ((float)(color&0xff))/255.0
+										  green: ((float)(color&0xff00))/65280.0
+										   blue: ((float)(color&0xff0000))/16711680.0
+										  alpha: 1.0];
+#endif
 	
 	// Tell the buffer to erase this window eventually
 	[cocoaglk_buffer fillAreaInWindowWithIdentifier: win->identifier

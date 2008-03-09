@@ -6,7 +6,11 @@
 //  Copyright 2005 Andrew Hunter. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#if defined(COCOAGLK_IPHONE)
+# include <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
 
 #import "GlkStreamProtocol.h"
 
@@ -78,9 +82,15 @@
 					inStream: (glui32) streamIdentifier;
 
 // Graphics
+#if !defined(COCOAGLK_IPHONE)
 - (void) fillAreaInWindowWithIdentifier: (unsigned) identifier
 							 withColour: (in bycopy NSColor*) color
 							  rectangle: (NSRect) windowArea;
+#else
+- (void) fillAreaInWindowWithIdentifier: (unsigned) identifier
+							 withColour: (in bycopy UIColor*) color
+							  rectangle: (NSRect) windowArea;
+#endif
 - (void) drawImageWithIdentifier: (unsigned) imageIdentifier
 		  inWindowWithIdentifier: (unsigned) windowIdentifier
 					  atPosition: (NSPoint) position;
