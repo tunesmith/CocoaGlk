@@ -25,13 +25,15 @@
 
 // = Variables =
 
-NSObject<GlkHub>* cocoaglk_hub = nil;
-NSObject<GlkSession>* cocoaglk_session = nil;
-GlkBuffer* cocoaglk_buffer = nil;
+#if !defined(COCOAGLK_IPHONE)
+NSObject<GlkHub>* cocoaglk_hub = nil;									// Remote object that allows us to create sessions
+GlkCocoa* cocoaglk_obj = nil;											// Object that is notified when the remote session finishes
+#endif
 
-NSAutoreleasePool* cocoaglk_pool = nil;
+NSObject<GlkSession>* cocoaglk_session = nil;							// The active session
+GlkBuffer* cocoaglk_buffer = nil;										// The global buffer
 
-GlkCocoa* cocoaglk_obj = nil;
+NSAutoreleasePool* cocoaglk_pool = nil;									// The autorelease pool
 
 // = Object we use to receive some events =
 
@@ -55,6 +57,8 @@ GlkCocoa* cocoaglk_obj = nil;
 @end
 
 // = Starting up =
+
+#if !defined(COCOAGLK_IPHONE)
 
 void cocoaglk_start(int argv, const char** argc) {
 	[cocoaglk_pool release];
@@ -169,6 +173,8 @@ void cocoaglk_start(int argv, const char** argc) {
 	// Tell the session we're here
 	[cocoaglk_session clientHasStarted: getpid()];
 }
+
+#endif
 
 // Reports a warning to the server
 void cocoaglk_warning(char* warningText) {
