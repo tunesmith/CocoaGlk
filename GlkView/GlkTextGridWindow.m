@@ -136,6 +136,9 @@
 	if (width < 0) width = 0;
 	if (height < 0) height = 0;
 	
+	// Adjust the text container
+	[[textView textContainer] setContainerSize: NSMakeSize(width * [self charWidth], height * [self lineHeight])];
+	
 	// Adjust the typesetter
 	[(GlkGridTypesetter*)typesetter setCellSize: NSMakeSize([self charWidth], [self lineHeight])];
 	[(GlkGridTypesetter*)typesetter setGridWidth: width
