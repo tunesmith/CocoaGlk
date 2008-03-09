@@ -8,7 +8,12 @@
 #include "GlkClient/glk.h"
 #import "GlkClient/cocoaglk.h"
 
-#import <Cocoa/Cocoa.h>
+#if defined(COCOAGLK_IPHONE)
+# include <UIKit/UIKit.h>
+#else
+# import <Cocoa/Cocoa.h>
+#endif
+
 #import <GlkClient/GlkImageSourceProtocol.h>
 
 @interface GlkImageTestSource : NSObject<GlkImageSource> {
@@ -17,6 +22,8 @@
 @end
 
 @implementation GlkImageTestSource
+
+#if !defined(COCOAGLK_IPHONE)
 
 - (NSData*) dataForImageResource: (glui32) image {
 	static NSImage* ourImage = nil;
@@ -27,6 +34,15 @@
 	
 	return [ourImage TIFFRepresentation];
 }
+
+#else
+
+- (NSData*) dataForImageResource: (glui32) image {
+	// IMPLEMENT ME
+	return nil;
+}
+
+#endif
 
 @end
 
