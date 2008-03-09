@@ -94,6 +94,7 @@
 
     if (self) {
 		// Build the text view
+		hasMorePrompt = YES;
 		[self setupTextview];
 		//[self addSubview: scrollView];
 		
@@ -813,6 +814,15 @@
 	return (finalMoreState-lastMoreState)*percent + lastMoreState;
 }
 
+- (void) setUsesMorePrompt: (BOOL) useMorePrompt {
+	hasMorePrompt = useMorePrompt;
+	[self resetMorePrompt];
+}
+
+- (void) setInfiniteSize {
+	[[textView textContainer] setContainerSize: NSMakeSize(1e8, 1e8)];
+}
+
 - (void) animateMore {
 	// Update the window alpha
 	float newMoreState = [self currentMoreState];
@@ -904,6 +914,9 @@
 
 - (void) resetMorePrompt: (int) moreChar
 				  paging: (BOOL) paging {
+	// Do nothing if the more prompt is turned off for this window
+	if (!hasMorePrompt) return;
+	
 	NSRect frame = [[scrollView contentView] bounds];
 	moreOffset = moreChar;
 	

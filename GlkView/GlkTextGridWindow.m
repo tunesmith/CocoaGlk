@@ -18,6 +18,9 @@
 // = Initialisation =
 
 - (void) setupTextview {
+	// Text grid windows never have a more prompt
+	[self setUsesMorePrompt: NO];
+	
 	// Construct the text system
 	textStorage = [[NSTextStorage alloc] init];
 	
@@ -136,7 +139,7 @@
 	if (width < 0) width = 0;
 	if (height < 0) height = 0;
 	
-	// Adjust the text container
+	// Adjust the text container size
 	[[textView textContainer] setContainerSize: NSMakeSize(width * [self charWidth], height * [self lineHeight])];
 	
 	// Adjust the typesetter

@@ -29,6 +29,7 @@
 	BOOL willMakeEditable;								// YES if a request to make the text editable is pending
 	BOOL willMakeNonEditable;							// YES if a request to make the text non-editable is pending
 	
+	BOOL hasMorePrompt;									// YES if this window has a more prompt
 	int moreOffset;										// The character that should be the first on the current 'page'
 	float lastMorePos;									// The last y position a [ MORE ] prompt appeared
 	float nextMorePos;									// The y position that the next [ MORE ] prompt should appear at
@@ -50,6 +51,8 @@
 - (void) makeTextEditable;								// Requests that the text buffer view be made editable (ie, ready for command input), takes account of buffering issues
 - (void) makeTextNonEditable;							// Requests that the text buffer view be made non-editable, takes account of buffering issues
 
+- (void) setUsesMorePrompt: (BOOL) useMorePrompt;		// Sets whether or not a [ MORE ] prompt should be displayed for this window
+- (void) setInfiniteSize;								// Sets this window to be infinite size
 - (float) currentMoreState;								// The current [ MORE ] animation state (0 = hidden, 1 = shown)
 - (void) displayMorePromptIfNecessary;					// A request to display the [ MORE ] prompt if necessary
 - (void) setMoreShown: (BOOL) shown;					// Sets whether or not the [ MORE ] prompt is shown
