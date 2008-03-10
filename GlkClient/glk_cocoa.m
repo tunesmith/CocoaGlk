@@ -51,7 +51,11 @@ NSAutoreleasePool* cocoaglk_pool = nil;									// The autorelease pool
 	}
 	
 	NSLog(@"Connection died");
+#if defined(COCOAGLK_IPHONE)
+	[NSThread exit];
+#else
 	exit(1);
+#endif
 }
 
 @end
@@ -196,16 +200,30 @@ void cocoaglk_error(char* errorText) {
 	NSLog(@"TRACE: cocoaglk_error(\"%s\")", errorText);
 #endif
 
-	cocoaglk_flushbuffer("About to show an error");
-	
-	NSString* errorString = [[NSString alloc] initWithBytes: errorText
-													 length: strlen(errorText)
-												   encoding: NSISOLatin1StringEncoding];
-	[cocoaglk_session showError: errorString];
+	static BOOL showingError = NO;
+	if (!showingError) {
+		showingError = YES;
+		
+		cocoaglk_flushbuffer("About to show an error");
+		
+		NSString* errorString = [[NSString alloc] initWithBytes: errorText
+														 length: strlen(errorText)
+													   encoding: NSISOLatin1StringEncoding];
+		[cocoaglk_session showError: errorString];
 
-	if (cocoaglk_interrupt) cocoaglk_interrupt();
-	[cocoaglk_session clientHasFinished];
-	exit(1);
+		if (cocoaglk_interrupt) cocoaglk_interrupt();
+		[cocoaglk_session clientHasFinished];
+		
+		showingError = NO;
+
+#if defined(COCOAGLK_IPHONE)
+		// Kill the interpreter thread
+		[NSThread exit];
+#else
+		// Kill the interpreter task
+		exit(1);
+#endif
+	}
 }
 
 // Logs a message to the server

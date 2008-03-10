@@ -58,13 +58,13 @@ extern void cocoaglk_unregister_line_buffers(winid_t win);	// Unregisters any li
 
 // = Variables =
 
-extern NSObject<GlkSession>* cocoaglk_session;
-extern NSObject<GlkHub>* cocoaglk_hub;
+extern NSObject<GlkSession>*	cocoaglk_session;		// The running session
+extern NSObject<GlkHub>*		cocoaglk_hub;			// The hub session dispatcher object
 
-extern GlkBuffer* cocoaglk_buffer;
-extern NSAutoreleasePool* cocoaglk_pool;
+extern GlkBuffer*				cocoaglk_buffer;		// The shared buffer object
+extern NSAutoreleasePool*		cocoaglk_pool;			// The interpreter thread autorelease pool
 
-extern strid_t cocoaglk_firststream;
+extern strid_t					cocoaglk_firststream;	// The 'first stream' (typically containing the game to run)
 
 extern gidispatch_rock_t (*cocoaglk_register)(void *obj, glui32 objclass);
 extern void (*cocoaglk_unregister)(void *obj, glui32 objclass, gidispatch_rock_t objrock);

@@ -37,7 +37,11 @@ void glk_exit(void) {
 	// Kill off the autorelease pool
 	[cocoaglk_pool release];
 	
+#if !defined(COCOAGLK_IPHONE)
 	exit(0);
+#else
+	[NSThread exit];
+#endif
 }
 
 //
