@@ -122,6 +122,47 @@
 		4BEF18CD0AB4643600131910 /* GlkTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D3B580AB462C90038255E /* GlkTypesetter.m */; };
 		4BEF18CE0AB4643A00131910 /* GlkTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B2D3B570AB462C90038255E /* GlkTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BF0854A0E1675D500DB5C6B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF085490E1675D500DB5C6B /* CoreAudio.framework */; };
+		4BF0855C0E16768400DB5C6B /* GlkSoundDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF0855A0E16768400DB5C6B /* GlkSoundDataSource.h */; };
+		4BF085870E16787900DB5C6B /* fastmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085620E16787900DB5C6B /* fastmix.cpp */; };
+		4BF085880E16787900DB5C6B /* load_669.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085630E16787900DB5C6B /* load_669.cpp */; };
+		4BF085890E16787900DB5C6B /* load_abc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085640E16787900DB5C6B /* load_abc.cpp */; };
+		4BF0858A0E16787900DB5C6B /* load_amf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085650E16787900DB5C6B /* load_amf.cpp */; };
+		4BF0858B0E16787900DB5C6B /* load_ams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085660E16787900DB5C6B /* load_ams.cpp */; };
+		4BF0858C0E16787900DB5C6B /* load_dbm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085670E16787900DB5C6B /* load_dbm.cpp */; };
+		4BF0858D0E16787900DB5C6B /* load_dmf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085680E16787900DB5C6B /* load_dmf.cpp */; };
+		4BF0858E0E16787900DB5C6B /* load_dsm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085690E16787900DB5C6B /* load_dsm.cpp */; };
+		4BF0858F0E16787900DB5C6B /* load_far.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856A0E16787900DB5C6B /* load_far.cpp */; };
+		4BF085900E16787900DB5C6B /* load_it.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856B0E16787900DB5C6B /* load_it.cpp */; };
+		4BF085910E16787900DB5C6B /* load_j2b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856C0E16787900DB5C6B /* load_j2b.cpp */; };
+		4BF085920E16787900DB5C6B /* load_mdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856D0E16787900DB5C6B /* load_mdl.cpp */; };
+		4BF085930E16787900DB5C6B /* load_med.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856E0E16787900DB5C6B /* load_med.cpp */; };
+		4BF085940E16787900DB5C6B /* load_mid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0856F0E16787900DB5C6B /* load_mid.cpp */; };
+		4BF085950E16787900DB5C6B /* load_mod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085700E16787900DB5C6B /* load_mod.cpp */; };
+		4BF085960E16787900DB5C6B /* load_mt2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085710E16787900DB5C6B /* load_mt2.cpp */; };
+		4BF085970E16787900DB5C6B /* load_mtm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085720E16787900DB5C6B /* load_mtm.cpp */; };
+		4BF085980E16787900DB5C6B /* load_okt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085730E16787900DB5C6B /* load_okt.cpp */; };
+		4BF085990E16787900DB5C6B /* load_pat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085740E16787900DB5C6B /* load_pat.cpp */; };
+		4BF0859A0E16787900DB5C6B /* load_pat.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085750E16787900DB5C6B /* load_pat.h */; };
+		4BF0859B0E16787900DB5C6B /* load_psm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085760E16787900DB5C6B /* load_psm.cpp */; };
+		4BF0859C0E16787900DB5C6B /* load_ptm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085770E16787900DB5C6B /* load_ptm.cpp */; };
+		4BF0859D0E16787900DB5C6B /* load_s3m.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085780E16787900DB5C6B /* load_s3m.cpp */; };
+		4BF0859E0E16787900DB5C6B /* load_stm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085790E16787900DB5C6B /* load_stm.cpp */; };
+		4BF0859F0E16787900DB5C6B /* load_ult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857A0E16787900DB5C6B /* load_ult.cpp */; };
+		4BF085A00E16787900DB5C6B /* load_umx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857B0E16787900DB5C6B /* load_umx.cpp */; };
+		4BF085A10E16787900DB5C6B /* load_wav.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857C0E16787900DB5C6B /* load_wav.cpp */; };
+		4BF085A20E16787900DB5C6B /* load_xm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857D0E16787900DB5C6B /* load_xm.cpp */; };
+		4BF085A30E16787900DB5C6B /* mmcmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857E0E16787900DB5C6B /* mmcmp.cpp */; };
+		4BF085A40E16787900DB5C6B /* modplug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF0857F0E16787900DB5C6B /* modplug.cpp */; };
+		4BF085A50E16787900DB5C6B /* modplug.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085800E16787900DB5C6B /* modplug.h */; };
+		4BF085A60E16787900DB5C6B /* snd_dsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085810E16787900DB5C6B /* snd_dsp.cpp */; };
+		4BF085A70E16787900DB5C6B /* snd_flt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085820E16787900DB5C6B /* snd_flt.cpp */; };
+		4BF085A80E16787900DB5C6B /* snd_fx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085830E16787900DB5C6B /* snd_fx.cpp */; };
+		4BF085A90E16787900DB5C6B /* sndfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085840E16787900DB5C6B /* sndfile.cpp */; };
+		4BF085AA0E16787900DB5C6B /* sndmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085850E16787900DB5C6B /* sndmix.cpp */; };
+		4BF085AB0E16787900DB5C6B /* tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BF085860E16787900DB5C6B /* tables.cpp */; };
+		4BF085B90E16791000DB5C6B /* it_defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085B60E16791000DB5C6B /* it_defs.h */; };
+		4BF085BA0E16791000DB5C6B /* sndfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085B70E16791000DB5C6B /* sndfile.h */; };
+		4BF085BB0E16791000DB5C6B /* stdafx.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BF085B80E16791000DB5C6B /* stdafx.h */; };
 		4BFA18A107F726D60068E16A /* GlkEventListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA18A207F726D60068E16A /* GlkEventProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA18A007F726D60068E16A /* GlkEventProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA18A307F726D60068E16A /* GlkEventListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */; settings = {ATTRIBUTES = (); }; };
@@ -350,6 +391,47 @@
 		4BF0852A0E166E8300DB5C6B /* GlkSound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlkSound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF0852B0E166E8300DB5C6B /* GlkSound-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlkSound-Info.plist"; sourceTree = "<group>"; };
 		4BF085490E1675D500DB5C6B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
+		4BF0855A0E16768400DB5C6B /* GlkSoundDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkSoundDataSource.h; sourceTree = "<group>"; };
+		4BF085620E16787900DB5C6B /* fastmix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fastmix.cpp; path = "../libmodplug-0.8.4/src/fastmix.cpp"; sourceTree = "<group>"; };
+		4BF085630E16787900DB5C6B /* load_669.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_669.cpp; path = "../libmodplug-0.8.4/src/load_669.cpp"; sourceTree = "<group>"; };
+		4BF085640E16787900DB5C6B /* load_abc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_abc.cpp; path = "../libmodplug-0.8.4/src/load_abc.cpp"; sourceTree = "<group>"; };
+		4BF085650E16787900DB5C6B /* load_amf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_amf.cpp; path = "../libmodplug-0.8.4/src/load_amf.cpp"; sourceTree = "<group>"; };
+		4BF085660E16787900DB5C6B /* load_ams.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_ams.cpp; path = "../libmodplug-0.8.4/src/load_ams.cpp"; sourceTree = "<group>"; };
+		4BF085670E16787900DB5C6B /* load_dbm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_dbm.cpp; path = "../libmodplug-0.8.4/src/load_dbm.cpp"; sourceTree = "<group>"; };
+		4BF085680E16787900DB5C6B /* load_dmf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_dmf.cpp; path = "../libmodplug-0.8.4/src/load_dmf.cpp"; sourceTree = "<group>"; };
+		4BF085690E16787900DB5C6B /* load_dsm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_dsm.cpp; path = "../libmodplug-0.8.4/src/load_dsm.cpp"; sourceTree = "<group>"; };
+		4BF0856A0E16787900DB5C6B /* load_far.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_far.cpp; path = "../libmodplug-0.8.4/src/load_far.cpp"; sourceTree = "<group>"; };
+		4BF0856B0E16787900DB5C6B /* load_it.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_it.cpp; path = "../libmodplug-0.8.4/src/load_it.cpp"; sourceTree = "<group>"; };
+		4BF0856C0E16787900DB5C6B /* load_j2b.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_j2b.cpp; path = "../libmodplug-0.8.4/src/load_j2b.cpp"; sourceTree = "<group>"; };
+		4BF0856D0E16787900DB5C6B /* load_mdl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mdl.cpp; path = "../libmodplug-0.8.4/src/load_mdl.cpp"; sourceTree = "<group>"; };
+		4BF0856E0E16787900DB5C6B /* load_med.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_med.cpp; path = "../libmodplug-0.8.4/src/load_med.cpp"; sourceTree = "<group>"; };
+		4BF0856F0E16787900DB5C6B /* load_mid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mid.cpp; path = "../libmodplug-0.8.4/src/load_mid.cpp"; sourceTree = "<group>"; };
+		4BF085700E16787900DB5C6B /* load_mod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mod.cpp; path = "../libmodplug-0.8.4/src/load_mod.cpp"; sourceTree = "<group>"; };
+		4BF085710E16787900DB5C6B /* load_mt2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mt2.cpp; path = "../libmodplug-0.8.4/src/load_mt2.cpp"; sourceTree = "<group>"; };
+		4BF085720E16787900DB5C6B /* load_mtm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mtm.cpp; path = "../libmodplug-0.8.4/src/load_mtm.cpp"; sourceTree = "<group>"; };
+		4BF085730E16787900DB5C6B /* load_okt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_okt.cpp; path = "../libmodplug-0.8.4/src/load_okt.cpp"; sourceTree = "<group>"; };
+		4BF085740E16787900DB5C6B /* load_pat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_pat.cpp; path = "../libmodplug-0.8.4/src/load_pat.cpp"; sourceTree = "<group>"; };
+		4BF085750E16787900DB5C6B /* load_pat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = load_pat.h; path = "../libmodplug-0.8.4/src/load_pat.h"; sourceTree = "<group>"; };
+		4BF085760E16787900DB5C6B /* load_psm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_psm.cpp; path = "../libmodplug-0.8.4/src/load_psm.cpp"; sourceTree = "<group>"; };
+		4BF085770E16787900DB5C6B /* load_ptm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_ptm.cpp; path = "../libmodplug-0.8.4/src/load_ptm.cpp"; sourceTree = "<group>"; };
+		4BF085780E16787900DB5C6B /* load_s3m.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_s3m.cpp; path = "../libmodplug-0.8.4/src/load_s3m.cpp"; sourceTree = "<group>"; };
+		4BF085790E16787900DB5C6B /* load_stm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_stm.cpp; path = "../libmodplug-0.8.4/src/load_stm.cpp"; sourceTree = "<group>"; };
+		4BF0857A0E16787900DB5C6B /* load_ult.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_ult.cpp; path = "../libmodplug-0.8.4/src/load_ult.cpp"; sourceTree = "<group>"; };
+		4BF0857B0E16787900DB5C6B /* load_umx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_umx.cpp; path = "../libmodplug-0.8.4/src/load_umx.cpp"; sourceTree = "<group>"; };
+		4BF0857C0E16787900DB5C6B /* load_wav.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_wav.cpp; path = "../libmodplug-0.8.4/src/load_wav.cpp"; sourceTree = "<group>"; };
+		4BF0857D0E16787900DB5C6B /* load_xm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_xm.cpp; path = "../libmodplug-0.8.4/src/load_xm.cpp"; sourceTree = "<group>"; };
+		4BF0857E0E16787900DB5C6B /* mmcmp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mmcmp.cpp; path = "../libmodplug-0.8.4/src/mmcmp.cpp"; sourceTree = "<group>"; };
+		4BF0857F0E16787900DB5C6B /* modplug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = modplug.cpp; path = "../libmodplug-0.8.4/src/modplug.cpp"; sourceTree = "<group>"; };
+		4BF085800E16787900DB5C6B /* modplug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = modplug.h; path = "../libmodplug-0.8.4/src/modplug.h"; sourceTree = "<group>"; };
+		4BF085810E16787900DB5C6B /* snd_dsp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snd_dsp.cpp; path = "../libmodplug-0.8.4/src/snd_dsp.cpp"; sourceTree = "<group>"; };
+		4BF085820E16787900DB5C6B /* snd_flt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snd_flt.cpp; path = "../libmodplug-0.8.4/src/snd_flt.cpp"; sourceTree = "<group>"; };
+		4BF085830E16787900DB5C6B /* snd_fx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snd_fx.cpp; path = "../libmodplug-0.8.4/src/snd_fx.cpp"; sourceTree = "<group>"; };
+		4BF085840E16787900DB5C6B /* sndfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sndfile.cpp; path = "../libmodplug-0.8.4/src/sndfile.cpp"; sourceTree = "<group>"; };
+		4BF085850E16787900DB5C6B /* sndmix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sndmix.cpp; path = "../libmodplug-0.8.4/src/sndmix.cpp"; sourceTree = "<group>"; };
+		4BF085860E16787900DB5C6B /* tables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tables.cpp; path = "../libmodplug-0.8.4/src/tables.cpp"; sourceTree = "<group>"; };
+		4BF085B60E16791000DB5C6B /* it_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = it_defs.h; path = "../libmodplug-0.8.4/src/libmodplug/it_defs.h"; sourceTree = "<group>"; };
+		4BF085B70E16791000DB5C6B /* sndfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sndfile.h; path = "../libmodplug-0.8.4/src/libmodplug/sndfile.h"; sourceTree = "<group>"; };
+		4BF085B80E16791000DB5C6B /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdafx.h; path = "../libmodplug-0.8.4/src/libmodplug/stdafx.h"; sourceTree = "<group>"; };
 		4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GlkEventListenerProtocol.h; sourceTree = "<group>"; };
 		4BFA18A007F726D60068E16A /* GlkEventProtocol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GlkEventProtocol.h; sourceTree = "<group>"; };
 		4BFA19F907F77A820068E16A /* GlkFileRefProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkFileRefProtocol.h; sourceTree = "<group>"; };
@@ -709,6 +791,7 @@
 		4BF0851F0E166E5100DB5C6B /* GlkSound */ = {
 			isa = PBXGroup;
 			children = (
+				4BF085580E16765300DB5C6B /* Protocol */,
 				4BF085360E16708100DB5C6B /* modplug */,
 			);
 			path = GlkSound;
@@ -717,9 +800,57 @@
 		4BF085360E16708100DB5C6B /* modplug */ = {
 			isa = PBXGroup;
 			children = (
+				4BF085B60E16791000DB5C6B /* it_defs.h */,
+				4BF085B70E16791000DB5C6B /* sndfile.h */,
+				4BF085B80E16791000DB5C6B /* stdafx.h */,
+				4BF085620E16787900DB5C6B /* fastmix.cpp */,
+				4BF085630E16787900DB5C6B /* load_669.cpp */,
+				4BF085640E16787900DB5C6B /* load_abc.cpp */,
+				4BF085650E16787900DB5C6B /* load_amf.cpp */,
+				4BF085660E16787900DB5C6B /* load_ams.cpp */,
+				4BF085670E16787900DB5C6B /* load_dbm.cpp */,
+				4BF085680E16787900DB5C6B /* load_dmf.cpp */,
+				4BF085690E16787900DB5C6B /* load_dsm.cpp */,
+				4BF0856A0E16787900DB5C6B /* load_far.cpp */,
+				4BF0856B0E16787900DB5C6B /* load_it.cpp */,
+				4BF0856C0E16787900DB5C6B /* load_j2b.cpp */,
+				4BF0856D0E16787900DB5C6B /* load_mdl.cpp */,
+				4BF0856E0E16787900DB5C6B /* load_med.cpp */,
+				4BF0856F0E16787900DB5C6B /* load_mid.cpp */,
+				4BF085700E16787900DB5C6B /* load_mod.cpp */,
+				4BF085710E16787900DB5C6B /* load_mt2.cpp */,
+				4BF085720E16787900DB5C6B /* load_mtm.cpp */,
+				4BF085730E16787900DB5C6B /* load_okt.cpp */,
+				4BF085740E16787900DB5C6B /* load_pat.cpp */,
+				4BF085750E16787900DB5C6B /* load_pat.h */,
+				4BF085760E16787900DB5C6B /* load_psm.cpp */,
+				4BF085770E16787900DB5C6B /* load_ptm.cpp */,
+				4BF085780E16787900DB5C6B /* load_s3m.cpp */,
+				4BF085790E16787900DB5C6B /* load_stm.cpp */,
+				4BF0857A0E16787900DB5C6B /* load_ult.cpp */,
+				4BF0857B0E16787900DB5C6B /* load_umx.cpp */,
+				4BF0857C0E16787900DB5C6B /* load_wav.cpp */,
+				4BF0857D0E16787900DB5C6B /* load_xm.cpp */,
+				4BF0857E0E16787900DB5C6B /* mmcmp.cpp */,
+				4BF0857F0E16787900DB5C6B /* modplug.cpp */,
+				4BF085800E16787900DB5C6B /* modplug.h */,
+				4BF085810E16787900DB5C6B /* snd_dsp.cpp */,
+				4BF085820E16787900DB5C6B /* snd_flt.cpp */,
+				4BF085830E16787900DB5C6B /* snd_fx.cpp */,
+				4BF085840E16787900DB5C6B /* sndfile.cpp */,
+				4BF085850E16787900DB5C6B /* sndmix.cpp */,
+				4BF085860E16787900DB5C6B /* tables.cpp */,
 			);
 			name = modplug;
-			path = ../ModPlug/modplug;
+			path = ../SoundCodecs/modplug;
+			sourceTree = "<group>";
+		};
+		4BF085580E16765300DB5C6B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				4BF0855A0E16768400DB5C6B /* GlkSoundDataSource.h */,
+			);
+			name = Protocol;
 			sourceTree = "<group>";
 		};
 		4BFA1CDA07F8A40C0068E16A /* Extras */ = {
@@ -804,6 +935,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BF0855C0E16768400DB5C6B /* GlkSoundDataSource.h in Headers */,
+				4BF0859A0E16787900DB5C6B /* load_pat.h in Headers */,
+				4BF085A50E16787900DB5C6B /* modplug.h in Headers */,
+				4BF085B90E16791000DB5C6B /* it_defs.h in Headers */,
+				4BF085BA0E16791000DB5C6B /* sndfile.h in Headers */,
+				4BF085BB0E16791000DB5C6B /* stdafx.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1111,6 +1248,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BF085870E16787900DB5C6B /* fastmix.cpp in Sources */,
+				4BF085880E16787900DB5C6B /* load_669.cpp in Sources */,
+				4BF085890E16787900DB5C6B /* load_abc.cpp in Sources */,
+				4BF0858A0E16787900DB5C6B /* load_amf.cpp in Sources */,
+				4BF0858B0E16787900DB5C6B /* load_ams.cpp in Sources */,
+				4BF0858C0E16787900DB5C6B /* load_dbm.cpp in Sources */,
+				4BF0858D0E16787900DB5C6B /* load_dmf.cpp in Sources */,
+				4BF0858E0E16787900DB5C6B /* load_dsm.cpp in Sources */,
+				4BF0858F0E16787900DB5C6B /* load_far.cpp in Sources */,
+				4BF085900E16787900DB5C6B /* load_it.cpp in Sources */,
+				4BF085910E16787900DB5C6B /* load_j2b.cpp in Sources */,
+				4BF085920E16787900DB5C6B /* load_mdl.cpp in Sources */,
+				4BF085930E16787900DB5C6B /* load_med.cpp in Sources */,
+				4BF085940E16787900DB5C6B /* load_mid.cpp in Sources */,
+				4BF085950E16787900DB5C6B /* load_mod.cpp in Sources */,
+				4BF085960E16787900DB5C6B /* load_mt2.cpp in Sources */,
+				4BF085970E16787900DB5C6B /* load_mtm.cpp in Sources */,
+				4BF085980E16787900DB5C6B /* load_okt.cpp in Sources */,
+				4BF085990E16787900DB5C6B /* load_pat.cpp in Sources */,
+				4BF0859B0E16787900DB5C6B /* load_psm.cpp in Sources */,
+				4BF0859C0E16787900DB5C6B /* load_ptm.cpp in Sources */,
+				4BF0859D0E16787900DB5C6B /* load_s3m.cpp in Sources */,
+				4BF0859E0E16787900DB5C6B /* load_stm.cpp in Sources */,
+				4BF0859F0E16787900DB5C6B /* load_ult.cpp in Sources */,
+				4BF085A00E16787900DB5C6B /* load_umx.cpp in Sources */,
+				4BF085A10E16787900DB5C6B /* load_wav.cpp in Sources */,
+				4BF085A20E16787900DB5C6B /* load_xm.cpp in Sources */,
+				4BF085A30E16787900DB5C6B /* mmcmp.cpp in Sources */,
+				4BF085A40E16787900DB5C6B /* modplug.cpp in Sources */,
+				4BF085A60E16787900DB5C6B /* snd_dsp.cpp in Sources */,
+				4BF085A70E16787900DB5C6B /* snd_flt.cpp in Sources */,
+				4BF085A80E16787900DB5C6B /* snd_fx.cpp in Sources */,
+				4BF085A90E16787900DB5C6B /* sndfile.cpp in Sources */,
+				4BF085AA0E16787900DB5C6B /* sndmix.cpp in Sources */,
+				4BF085AB0E16787900DB5C6B /* tables.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1769,8 +1941,8 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
@@ -1797,8 +1969,8 @@
 				FRAMEWORK_VERSION = A;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1823,8 +1995,8 @@
 				FRAMEWORK_VERSION = A;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
 				OTHER_LDFLAGS = (
