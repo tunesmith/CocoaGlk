@@ -139,7 +139,7 @@ void glk_main(void) {
 	glk_image_draw(mainwin1, 0, 20, 20);
 	
 	// Process events until the user presses a key
-	finished = NO;
+	finished = YES;
 	while (!finished) {
 		glk_select(&evt);
 		
