@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -346,6 +346,8 @@
 		4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkBufferedStream.m; sourceTree = "<group>"; };
 		4BEE1D3907FCC1D900296CD2 /* GlkTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
 		4BEE1D3A07FCC1D900296CD2 /* GlkTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkTextView.m; sourceTree = "<group>"; };
+		4BF0852A0E166E8300DB5C6B /* GlkSound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GlkSound.framework; path = build/Development/GlkSound.framework; sourceTree = "<group>"; };
+		4BF0852B0E166E8300DB5C6B /* GlkSound-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlkSound-Info.plist"; sourceTree = "<group>"; };
 		4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GlkEventListenerProtocol.h; sourceTree = "<group>"; };
 		4BFA18A007F726D60068E16A /* GlkEventProtocol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GlkEventProtocol.h; sourceTree = "<group>"; };
 		4BFA19F907F77A820068E16A /* GlkFileRefProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkFileRefProtocol.h; sourceTree = "<group>"; };
@@ -404,6 +406,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4BF085280E166E8300DB5C6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072E0486CEB800E47090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -442,6 +451,7 @@
 				4B0459F107EA20F1002D7C88 /* multiwin */,
 				4B0459F607EA20FE002D7C88 /* glulxe */,
 				4BBC40F808A7AABD00B790B5 /* imagetest */,
+				4BF0852A0E166E8300DB5C6B /* GlkSound.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -452,6 +462,7 @@
 				4B51AA5007E8777900576AB9 /* Protocol */,
 				4B51AA3407E8763E00576AB9 /* GlkClient */,
 				4B51AA3307E8763700576AB9 /* GlkView */,
+				4BF0851F0E166E5100DB5C6B /* GlkSound */,
 				4B51AA3207E8761B00576AB9 /* GlkApplication */,
 				4B0459E607EA2033002D7C88 /* Clients */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -459,6 +470,7 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				4B51AA4807E8770600576AB9 /* GlkView-Info.plist */,
 				4B51AA5707E877C900576AB9 /* GlkClient-Info.plist */,
+				4BF0852B0E166E8300DB5C6B /* GlkSound-Info.plist */,
 			);
 			name = CocoaGlk;
 			sourceTree = "<group>";
@@ -690,6 +702,22 @@
 			name = Windows;
 			sourceTree = "<group>";
 		};
+		4BF0851F0E166E5100DB5C6B /* GlkSound */ = {
+			isa = PBXGroup;
+			children = (
+				4BF085360E16708100DB5C6B /* modplug */,
+			);
+			path = GlkSound;
+			sourceTree = "<group>";
+		};
+		4BF085360E16708100DB5C6B /* modplug */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = modplug;
+			path = ../ModPlug/modplug;
+			sourceTree = "<group>";
+		};
 		4BFA1CDA07F8A40C0068E16A /* Extras */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,6 +793,13 @@
 				4B4D379E0A97B53E0007FD80 /* GlkUcs4Stream.h in Headers */,
 				4B3CBD080B07DB0C0073216F /* GlkMemoryFileRef.h in Headers */,
 				4BBFE3980C4EC253007DEE18 /* GlkBufferedStream.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BF085250E166E8300DB5C6B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,6 +894,24 @@
 			productReference = 4BBC40F808A7AABD00B790B5 /* imagetest */;
 			productType = "com.apple.product-type.tool";
 		};
+		4BF085290E166E8300DB5C6B /* GlkSound */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4BF0852F0E166E8400DB5C6B /* Build configuration list for PBXNativeTarget "GlkSound" */;
+			buildPhases = (
+				4BF085250E166E8300DB5C6B /* Headers */,
+				4BF085260E166E8300DB5C6B /* Resources */,
+				4BF085270E166E8300DB5C6B /* Sources */,
+				4BF085280E166E8300DB5C6B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GlkSound;
+			productName = GlkSound;
+			productReference = 4BF0852A0E166E8300DB5C6B /* GlkSound.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		8D1107260486CEB800E47090 /* CocoaGlk */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4B6A86F1086DB1EA00BFAE69 /* Build configuration list for PBXNativeTarget "CocoaGlk" */;
@@ -899,6 +952,7 @@
 				8D1107260486CEB800E47090 /* CocoaGlk */,
 				4B51AA4607E8770600576AB9 /* GlkView */,
 				4B51AA5507E877C900576AB9 /* GlkClient */,
+				4BF085290E166E8300DB5C6B /* GlkSound */,
 				4B0459F007EA20F1002D7C88 /* multiwin */,
 				4B0459F507EA20FE002D7C88 /* glulxe */,
 				4BBC40F708A7AABD00B790B5 /* imagetest */,
@@ -924,6 +978,13 @@
 			files = (
 				4B51AA7507E878E900576AB9 /* GlkClient.icns in Resources */,
 				4B16BBDC08A50F6A001E4C40 /* Credits.rtfd in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BF085260E166E8300DB5C6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,6 +1100,13 @@
 			files = (
 				4BBC414308A7AB2600B790B5 /* glkmain.m in Sources */,
 				4BBC414508A7AB3B00B790B5 /* imagetest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BF085270E166E8300DB5C6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1566,7 +1634,7 @@
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.3.9.sdk";
 			};
 			name = Development;
@@ -1579,7 +1647,7 @@
 					ppc,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.3.9.sdk";
 				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
 			};
@@ -1593,7 +1661,7 @@
 					i386,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx10.4;
 				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.3.9.sdk";
 			};
 			name = Default;
@@ -1684,6 +1752,87 @@
 			};
 			name = Default;
 		};
+		4BF0852C0E166E8400DB5C6B /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "GlkSound-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = GlkSound;
+			};
+			name = Development;
+		};
+		4BF0852D0E166E8400DB5C6B /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "GlkSound-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = GlkSound;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		4BF0852E0E166E8400DB5C6B /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "GlkSound-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = GlkSound;
+			};
+			name = Default;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1753,6 +1902,16 @@
 				4BBC414708A7AB3B00B790B5 /* Development */,
 				4BBC414808A7AB3B00B790B5 /* Deployment */,
 				4BBC414908A7AB3B00B790B5 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		4BF0852F0E166E8400DB5C6B /* Build configuration list for PBXNativeTarget "GlkSound" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BF0852C0E166E8400DB5C6B /* Development */,
+				4BF0852D0E166E8400DB5C6B /* Deployment */,
+				4BF0852E0E166E8400DB5C6B /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
