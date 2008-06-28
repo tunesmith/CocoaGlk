@@ -121,6 +121,7 @@
 		4BEE1D3C07FCC1D900296CD2 /* GlkTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BEE1D3A07FCC1D900296CD2 /* GlkTextView.m */; };
 		4BEF18CD0AB4643600131910 /* GlkTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D3B580AB462C90038255E /* GlkTypesetter.m */; };
 		4BEF18CE0AB4643A00131910 /* GlkTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B2D3B570AB462C90038255E /* GlkTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4BF0854A0E1675D500DB5C6B /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF085490E1675D500DB5C6B /* CoreAudio.framework */; };
 		4BFA18A107F726D60068E16A /* GlkEventListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA18A207F726D60068E16A /* GlkEventProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA18A007F726D60068E16A /* GlkEventProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BFA18A307F726D60068E16A /* GlkEventListenerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */; settings = {ATTRIBUTES = (); }; };
@@ -346,8 +347,9 @@
 		4BBFE3970C4EC253007DEE18 /* GlkBufferedStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkBufferedStream.m; sourceTree = "<group>"; };
 		4BEE1D3907FCC1D900296CD2 /* GlkTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkTextView.h; sourceTree = "<group>"; };
 		4BEE1D3A07FCC1D900296CD2 /* GlkTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkTextView.m; sourceTree = "<group>"; };
-		4BF0852A0E166E8300DB5C6B /* GlkSound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GlkSound.framework; path = build/Development/GlkSound.framework; sourceTree = "<group>"; };
+		4BF0852A0E166E8300DB5C6B /* GlkSound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GlkSound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF0852B0E166E8300DB5C6B /* GlkSound-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlkSound-Info.plist"; sourceTree = "<group>"; };
+		4BF085490E1675D500DB5C6B /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
 		4BFA189F07F726D60068E16A /* GlkEventListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GlkEventListenerProtocol.h; sourceTree = "<group>"; };
 		4BFA18A007F726D60068E16A /* GlkEventProtocol.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GlkEventProtocol.h; sourceTree = "<group>"; };
 		4BFA19F907F77A820068E16A /* GlkFileRefProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkFileRefProtocol.h; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BF0854A0E1675D500DB5C6B /* CoreAudio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +431,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4BF085490E1675D500DB5C6B /* CoreAudio.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -1769,6 +1773,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
