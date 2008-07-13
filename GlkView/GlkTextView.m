@@ -160,8 +160,8 @@
 												   effectiveRange: &fragmentRange];
 		NSPoint loc = [layout locationForGlyphAtIndex: glyphNum];
 		
-		loc.x += fragment.origin.x;
-		loc.y += fragment.origin.y;
+		loc.x += fragment.origin.x + inset.width;
+		loc.y += fragment.origin.y + inset.height;
 		
 		[[glyph textSection] drawAtPoint: loc
 								  inView: self];		
