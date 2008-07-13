@@ -149,9 +149,13 @@ NSString* GlkImageAttribute = @"GlkImageAttribute";
 	NSRect imageRect;
 	
 	if (alignment == imagealign_MarginLeft) {
-		point.x = marginOffset;
+		NSSize inset = [(NSTextView*)view textContainerInset];
+		
+		point.x = marginOffset + inset.width;
 	} else if (alignment == imagealign_MarginRight) {
-		point.x = NSMaxX([view bounds])-marginOffset;
+		NSSize inset = [(NSTextView*)view textContainerInset];
+
+		point.x = NSMaxX([view bounds])-marginOffset - inset.width;
 	} else {
 		float maxWidth = NSMaxX([view bounds]) - point.x - 8;
 		if (maxWidth < size.width) scaleFactor = maxWidth/size.width;
