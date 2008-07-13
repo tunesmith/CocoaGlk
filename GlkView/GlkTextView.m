@@ -248,6 +248,7 @@
 			
 			loc.x += fragment.origin.x;
 			loc.y += fragment.origin.y;
+			loc.y += containerRect.origin.y + inset.height;
 			
 			[[glyph textSection] drawAtPoint: loc
 									  inView: self];
