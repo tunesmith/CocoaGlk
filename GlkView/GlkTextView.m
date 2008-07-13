@@ -247,6 +247,7 @@
 			NSPoint loc = [layout locationForGlyphAtIndex: glyphNum];
 			
 			loc.x += fragment.origin.x;
+			loc.x += inset.width;
 			loc.y += fragment.origin.y;
 			loc.y += inset.height;
 			
