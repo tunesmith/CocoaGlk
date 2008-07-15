@@ -1434,11 +1434,10 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 					  nextGlyphIndex: (unsigned*) nextGlyph {
 	// Deal with the case where there are no text containers to perform layout in
 	if ([containers count] <= 0) {
-		// TODO: just mark all the glyphs as invisible
-		[super layoutGlyphsInLayoutManager: layoutMgr
-					  startingAtGlyphIndex: startGlyphIndex
-				  maxNumberOfLineFragments: maxNumLines
-							nextGlyphIndex: nextGlyph];
+		// Just say we've laid everything out, seeing as it's got nowhere to go
+		if (nextGlyph) {
+			*nextGlyph = [layout numberOfGlyphs];
+		}
 		
 		return;
 	}
