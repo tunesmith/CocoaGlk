@@ -1442,6 +1442,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			maxNumberOfLineFragments: (unsigned) maxNumLines 
 					  nextGlyphIndex: (unsigned*) nextGlyph {
 	// Deal with the case where there are no text containers to perform layout in
+#if 0
 	if ([containers count] <= 0) {
 		// Just say we've laid everything out, seeing as it's got nowhere to go
 		if (nextGlyph) {
@@ -1450,6 +1451,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		
 		return;
 	}
+#endif
 
 	// Setup
 	[self prepareForLayoutInLayoutManager: layoutMgr
