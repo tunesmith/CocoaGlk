@@ -1404,9 +1404,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 - (void) prepareForLayoutInLayoutManager: (NSLayoutManager*) layoutMgr
 					startingAtGlyphIndex: (unsigned) startGlyphIndex {
 	// Setup: get the things that we're gong to layout
-	NSAttributedString* newStorage = [layoutMgr attributedString];
-	NSLayoutManager* newLayout = layoutMgr;
-	NSArray* newContainers = [layoutMgr textContainers];
+	NSAttributedString* newStorage	= [layoutMgr attributedString];
+	NSLayoutManager* newLayout		= layoutMgr;
+	NSArray* newContainers			= [layoutMgr textContainers];
 	
 	if (newStorage != storage || newLayout != layout || newContainers != containers || lastSetGlyph != startGlyphIndex) {
 #ifdef Debug
@@ -1416,16 +1416,25 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 	// Set the objects
-	layout = newLayout;
-	storage = newStorage;
-	containers = newContainers;
-	container = nil;
+	layout		= newLayout;
+	storage		= newStorage;
+	containers	= newContainers;
+	container	= nil;
 	
 	// Set the text container
-	container = [containers objectAtIndex: 0];
-	inset = [container lineFragmentPadding];
-	
-	size = [container containerSize];	
+	if ([containers count] > 0) {
+		// Lay out in a real container
+		container	= [containers objectAtIndex: 0];
+		inset		= [container lineFragmentPadding];
+		
+		size		= [container containerSize];	
+	} else {
+		// Lay out in a fake container
+		container	= nil;
+		inset		= 0;
+		
+		size		= NSMakeSize(100, 100);
+	}
 }
 
 - (void) layoutGlyphsInLayoutManager: (NSLayoutManager*) layoutMgr 
@@ -1510,7 +1519,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	int glyph = glyphRange.location;
 	
 	// Prepare for layout
-	[self prepareForLayoutInLayoutManager: [self layoutManager]
+	[self prepareForLayoutInLayoutManager: [self layoutManager]					// Compiler warning is OK as layoutParagraphAtPoint: is only supported on 10.4 or later
 					 startingAtGlyphIndex: glyph];
 	[self cacheGlyphsIncluding: glyphRange.location];
 	
