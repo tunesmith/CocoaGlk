@@ -451,7 +451,11 @@ void cocoaglk_window_discard(winid_t win) {
 void glk_window_close(winid_t win, stream_result_t *result) {	
 	// Some broken games call this with a NULL winid, just do nothing in this case: result will contain whatever garbage it started out with
 	if (!win) {
-		cocoaglk_warning("glk_window_close called with a NULL winid");
+		if (result) {
+			cocoaglk_error("glk_window_close called with a NULL winid: refusing to return an undefined stream result");
+		} else {
+			cocoaglk_warning("glk_window_close called with a NULL winid");
+		}
 		return;
 	}
 	
