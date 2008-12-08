@@ -52,6 +52,8 @@ typedef enum GlkLogStatus {
 	NSObject<GlkFilePrompt>* promptHandler;						// Used while prompting for a file
 	NSArray* allowedFiletypes;									// Types of files we can show in the panels
 	
+	BOOL alwaysPageOnMore;										// YES if windows in this view should automatically page through more prompts
+	
 	// File handling
 	NSMutableDictionary* extensionsForUsage;					// Dictionary mapping the file usage strings to the list of allowed file types
 	
@@ -145,6 +147,8 @@ typedef enum GlkLogStatus {
 - (void) setBorderWidth: (float) borderWidth;					// Sets up the border width for new pair windows
 
 // Dealing with [ MORE ] prompts
+- (void) setAlwaysPageOnMore: (BOOL) alwaysPage;				// YES if this CocoaGlk window should always page on more
+- (BOOL) alwaysPageOnMore;										// Ditto
 - (BOOL) morePromptsPending;									// True if any windows are waiting on a [ MORE ] prompts
 - (BOOL) pageAll;												// Causes all windows that require it to page forwards (returns NO if no windows actually needed paging)
 

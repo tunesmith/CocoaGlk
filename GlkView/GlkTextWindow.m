@@ -905,6 +905,15 @@
 		flushing = YES;
 		[[textView textStorage] beginEditing];
 	}
+	
+	// Page if necessary
+	if (isShown && [[self containingView] alwaysPageOnMore]) {
+		[[NSRunLoop currentRunLoop] performSelector: @selector(page)
+											 target: self 
+										   argument: nil 
+											  order: 16
+											  modes: [NSArray arrayWithObject: NSDefaultRunLoopMode]];
+	}
 }
 
 - (void) resetMorePrompt {

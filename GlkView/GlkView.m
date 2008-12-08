@@ -2324,12 +2324,12 @@
 	GlkWindow* candidate = rootWindow;
 	GlkWindow* initialCandidate = candidate;
 	
-	if (![candidate waitingForKeyboardInput]) candidate = [self rotateFrom: candidate];
-	while (candidate != initialCandidate && candidate != nil && ![candidate waitingForKeyboardInput]) {
+	if (![candidate waitingForUserKeyboardInput]) candidate = [self rotateFrom: candidate];
+	while (candidate != initialCandidate && candidate != nil && ![candidate waitingForUserKeyboardInput]) {
 		candidate = [self rotateFrom: candidate];
 	}
 	
-	return [candidate waitingForKeyboardInput];
+	return [candidate waitingForUserKeyboardInput];
 }
 
 - (int) sendCharacters: (NSString*) characters
@@ -2342,13 +2342,13 @@
 	// Rotate around until we find a window that is waiting for line or character input
 	GlkWindow* initialCandidate = candidate;
 	
-	if (![candidate waitingForKeyboardInput]) candidate = [self rotateFrom: candidate];
-	while (candidate != initialCandidate && candidate != nil && ![candidate waitingForKeyboardInput]) {
+	if (![candidate waitingForUserKeyboardInput]) candidate = [self rotateFrom: candidate];
+	while (candidate != initialCandidate && candidate != nil && ![candidate waitingForUserKeyboardInput]) {
 		candidate = [self rotateFrom: candidate];
 	}
 	
 	// If it's waiting for input, then send it some
-	if ([candidate waitingForKeyboardInput]) {
+	if ([candidate waitingForUserKeyboardInput]) {
 		[candidate forceLineInput: characters];
 	}
 	
@@ -2421,6 +2421,13 @@ static BOOL pageAllFrom(GlkWindow* win) {
 	return pageAllFrom(rootWindow);
 }
 
+- (void) setAlwaysPageOnMore: (BOOL) alwaysPage {
+	alwaysPageOnMore = alwaysPage;
+}
+
+- (BOOL) alwaysPageOnMore {
+	return alwaysPageOnMore;
+}
 
 // Various UI events
 

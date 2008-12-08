@@ -328,6 +328,11 @@
 	return charInput || lineInput || [self needsPaging];
 }
 
+- (BOOL) waitingForUserKeyboardInput {
+	// This differs in that we ignore the case where the window needs paging
+	return charInput || lineInput;
+}
+
 - (NSResponder*) windowResponder {
 	return self;
 }

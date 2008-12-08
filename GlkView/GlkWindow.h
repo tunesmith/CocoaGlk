@@ -130,6 +130,7 @@
 - (BOOL) waitingForLineInput;									// Returns YES if this window is waiting for line input
 - (BOOL) waitingForCharInput;									// Returns YES if this window is waiting for character input
 - (BOOL) waitingForKeyboardInput;								// Returns YES if this window is waiting for keyboard input
+- (BOOL) waitingForUserKeyboardInput;							// Returns YES if this window is waiting for keyboard input for user interaction with the running story
 - (NSResponder*) windowResponder;								// The control that responds to events for this window
 
 - (void) bufferIsFlushing;										// Called just before the buffer flushes (mostly used to tell the text windows to wait before performing layout)
