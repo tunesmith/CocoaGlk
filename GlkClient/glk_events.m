@@ -135,6 +135,12 @@ void glk_select(event_t *event) {
 					// Set the length correctly
 					if (length > event->win->bufLen) length = event->win->bufLen;
 					event->val1 = length;
+					
+					// Echo the text
+					if (event->win->stream && event->win->stream->echo) {
+						glk_put_buffer_stream_uni(event->win->stream->echo, event->win->inputBufUcs4, length);
+						glk_put_char_stream_uni(event->win->stream->echo, '\n');
+					}
 
 					// Deregister the buffer
 					cocoaglk_unregister_line_buffers(event->win);
@@ -151,6 +157,13 @@ void glk_select(event_t *event) {
 						
 						[latin1Input getBytes: event->win->inputBuf
 									   length: length];
+
+						
+						// Echo the text
+						if (event->win->stream && event->win->stream->echo) {
+							glk_put_buffer_stream(event->win->stream->echo, event->win->inputBuf, length);
+							glk_put_char_stream_uni(event->win->stream->echo, '\n');
+						}
 						
 						event->val1 = length;
 					}
