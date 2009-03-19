@@ -124,6 +124,8 @@
 		4B93F85A07F9BF9100BAA4EE /* GlkPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B93F85807F9BF9100BAA4EE /* GlkPreferences.m */; };
 		4B95C598C5B03AD500FD9F27 /* GlkGridTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B95C53CC5B03AD500FD9F27 /* GlkGridTypesetter.m */; };
 		4B95C599C5B03AD500FD9F27 /* GlkGridTypesetter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B95C53BC5B03AD500FD9F27 /* GlkGridTypesetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4B997F2A0F72FF1100EBE7BE /* accel.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B997F290F72FF1100EBE7BE /* accel.c */; };
+		4B997F2D0F72FF3900EBE7BE /* profile.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B997F2C0F72FF3900EBE7BE /* profile.c */; };
 		4BBC410B08A7AAF900B790B5 /* GlkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B51AA5607E877C900576AB9 /* GlkClient.framework */; };
 		4BBC414008A7AB1500B790B5 /* imagetest in Resources */ = {isa = PBXBuildFile; fileRef = 4BBC40F808A7AABD00B790B5 /* imagetest */; };
 		4BBC414308A7AB2600B790B5 /* glkmain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8BDE5707EB3EF6008AE26D /* glkmain.m */; };
@@ -208,7 +210,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4B51AA5507E877C900576AB9 /* GlkClient */;
+			remoteGlobalIDString = 4B51AA5507E877C900576AB9;
 			remoteInfo = GlkClient;
 		};
 		4B51AA4907E8771200576AB9 /* PBXContainerItemProxy */ = {
@@ -426,6 +428,8 @@
 		4B93F85807F9BF9100BAA4EE /* GlkPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkPreferences.m; sourceTree = "<group>"; };
 		4B95C53BC5B03AD500FD9F27 /* GlkGridTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkGridTypesetter.h; sourceTree = "<group>"; };
 		4B95C53CC5B03AD500FD9F27 /* GlkGridTypesetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkGridTypesetter.m; sourceTree = "<group>"; };
+		4B997F290F72FF1100EBE7BE /* accel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = accel.c; sourceTree = "<group>"; };
+		4B997F2C0F72FF3900EBE7BE /* profile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = profile.c; sourceTree = "<group>"; };
 		4BBC40F808A7AABD00B790B5 /* imagetest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = imagetest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BBC414408A7AB3B00B790B5 /* imagetest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imagetest.m; sourceTree = "<group>"; };
 		4BBFE3960C4EC253007DEE18 /* GlkBufferedStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkBufferedStream.h; sourceTree = "<group>"; };
@@ -653,6 +657,7 @@
 			isa = PBXGroup;
 			children = (
 				4BFA1C9E07F8A10F0068E16A /* cocoastart.m */,
+				4B997F290F72FF1100EBE7BE /* accel.c */,
 				4B045A0307EA2171002D7C88 /* exec.c */,
 				4B045A0407EA2171002D7C88 /* files.c */,
 				4B045A0507EA2171002D7C88 /* funcs.c */,
@@ -666,6 +671,7 @@
 				4B045A0C07EA2171002D7C88 /* opcodes.h */,
 				4B045A0D07EA2171002D7C88 /* operand.c */,
 				4B045A0E07EA2171002D7C88 /* osdepend.c */,
+				4B997F2C0F72FF3900EBE7BE /* profile.c */,
 				4B045A0F07EA2171002D7C88 /* search.c */,
 				4B045A1007EA2171002D7C88 /* serial.c */,
 				4B045A1107EA2171002D7C88 /* string.c */,
@@ -1277,6 +1283,8 @@
 				4B045A2207EA2186002D7C88 /* vm.c in Sources */,
 				4BFA1CA107F8A1110068E16A /* cocoastart.m in Sources */,
 				4B1241960CAC610300CA3374 /* heap.c in Sources */,
+				4B997F2A0F72FF1100EBE7BE /* accel.c in Sources */,
+				4B997F2D0F72FF3900EBE7BE /* profile.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
