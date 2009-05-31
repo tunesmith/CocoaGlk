@@ -856,7 +856,17 @@ void glk_window_clear(winid_t win) {
 	}
 	
 	// Clear the window (well, eventually)
-	[cocoaglk_buffer clearWindowIdentifier: win->identifier];
+	if (win->wintype == wintype_Graphics) {
+		NSColor* bgColour = [NSColor colorWithDeviceRed: ((float)(win->background&0xff))/255.0
+												  green: ((float)(win->background&0xff00))/65280.0
+												   blue: ((float)(win->background&0xff0000))/16711680.0
+												  alpha: 1.0];
+
+		[cocoaglk_buffer clearWindowIdentifier: win->identifier
+						  withBackgroundColour: bgColour];
+	} else {
+		[cocoaglk_buffer clearWindowIdentifier: win->identifier];
+	}
 }
 
 //

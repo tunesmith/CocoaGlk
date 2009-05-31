@@ -1440,6 +1440,22 @@
 	[win clearWindow];
 }
 
+- (void) clearWindowIdentifier: (glui32) identifier 
+		  withBackgroundColour: (NSColor*) bgCol {
+	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
+	
+	if (!win) {
+		NSLog(@"Warning: attempt to clear nonexistent window");
+		return;
+	}
+	
+	if ([win isKindOfClass: [GlkGraphicsWindow class]]) {
+		[(GlkGraphicsWindow*)win setBackgroundColour: bgCol];
+	}
+	
+	[win clearWindow];
+}
+
 - (void) setInputLine: (NSString*) inputLine
   forWindowIdentifier: (unsigned) identifier {
 	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];

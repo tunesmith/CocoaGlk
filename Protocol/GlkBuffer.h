@@ -57,6 +57,8 @@
 				toXposition: (int) xpos
 				  yPosition: (int) ypos;
 - (void) clearWindowIdentifier: (glui32) identifier;
+- (void) clearWindowIdentifier: (glui32) identifier
+		  withBackgroundColour: (in bycopy NSColor*) bgColour;
 - (void) setInputLine: (in bycopy NSString*) inputLine
   forWindowIdentifier: (unsigned) windowIdentifier;
 - (void) arrangeWindow: (glui32) identifier
