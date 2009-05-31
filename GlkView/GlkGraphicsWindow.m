@@ -44,7 +44,7 @@
 	[super dealloc];
 }
 
-- (void) clear {
+- (void) clearWindow {
 	NSSize imgSize = [windowImage size];
 	
 	// Fill in the background colour
@@ -69,7 +69,7 @@
 	if (oldSize.width < frame.size.width || oldSize.height < frame.size.height) {
 		// Resize and clear
 		[windowImage setSize: NSMakeSize(frame.size.width + 8.0, frame.size.height + 8.0)];
-		[self clear];
+		[self clearWindow];
 	}
 	
 	// Call the superclass
@@ -128,7 +128,7 @@
 	backgroundColour = [[mainStyle backColour] copy];
 	
 	// Clear the window
-	[self clear];
+	[self clearWindow];
 }
 
 // = Layout =
