@@ -54,6 +54,11 @@
 	NSRectFill(NSMakeRect(0,0, imgSize.width, imgSize.height));
 	
 	[windowImage unlockFocus];
+}
+
+- (void) clear {
+	// Clear the window
+	[self clearWindow];
 	
 	// Generate a redraw event for this window
 	GlkEvent* evt = [[GlkEvent alloc] initWithType: evtype_Redraw
@@ -69,7 +74,7 @@
 	if (oldSize.width < frame.size.width || oldSize.height < frame.size.height) {
 		// Resize and clear
 		[windowImage setSize: NSMakeSize(frame.size.width + 8.0, frame.size.height + 8.0)];
-		[self clearWindow];
+		[self clear];
 	}
 	
 	// Call the superclass
@@ -128,7 +133,7 @@
 	backgroundColour = [[mainStyle backColour] copy];
 	
 	// Clear the window
-	[self clearWindow];
+	[self clear];
 }
 
 // = Layout =
