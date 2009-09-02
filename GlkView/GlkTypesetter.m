@@ -1062,7 +1062,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	BOOL splitOnElastic = [paraStyle alignment]==NSJustifiedTextAlignment;
 	BOOL elastic = NO;
 	
-	float leftIndent = newParagraph?[paraStyle headIndent]:[paraStyle firstLineHeadIndent];
+	float leftIndent = newParagraph?[paraStyle firstLineHeadIndent]:[paraStyle headIndent];
 	float rightIndent = [paraStyle tailIndent];
 	float offset = inset + leftIndent + (activeLeftMargin?[activeLeftMargin width]:0);
 	
