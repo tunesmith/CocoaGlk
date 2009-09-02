@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 44;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -2010,9 +2010,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
+				GCC_VERSION = 4.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = macosx10.4;
-				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.3.9.sdk";
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
 			name = Development;
 		};
@@ -2023,10 +2024,10 @@
 					i386,
 					ppc,
 				);
+				GCC_VERSION = 4.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = macosx10.4;
-				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.3.9.sdk";
-				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
 			name = Deployment;
 		};
@@ -2037,9 +2038,10 @@
 					ppc,
 					i386,
 				);
+				GCC_VERSION = 4.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = macosx10.4;
-				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.3.9.sdk";
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
 			name = Default;
 		};
@@ -2133,7 +2135,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -2146,7 +2148,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -2162,7 +2164,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2190,7 +2193,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
