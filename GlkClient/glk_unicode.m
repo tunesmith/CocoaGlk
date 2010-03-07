@@ -346,6 +346,7 @@ glsi32 glk_get_char_stream_uni(strid_t str) {
 	
 	if (res == GlkEOFChar) return -1;
 	
+	str->read++;
 	return res;
 }
 
@@ -379,6 +380,7 @@ glui32 glk_get_buffer_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 		buf[x] = (bytes[pos+0]<<24)|(bytes[pos+1]<<16)|(bytes[pos+2]<<8)|(bytes[pos+3]<<0);
 	}
 	
+	str->read += numChars;
 	return numChars;
 }
 
@@ -401,7 +403,9 @@ glui32 glk_get_line_stream_uni(strid_t str, glui32 *buf, glui32 len) {
 	
 	// Next, use the stream object to get our result
 	NSString* line = [str->stream getLineWithLength: len-1];
-	return cocoaglk_copy_string_to_uni_buf(line, buf, len);
+	int readChars = cocoaglk_copy_string_to_uni_buf(line, buf, len);
+	str->read += readChars;
+	return readChars;
 }
 
 void glk_request_char_event_uni(winid_t win) {

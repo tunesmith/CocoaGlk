@@ -1088,6 +1088,7 @@ glsi32 glk_get_char_stream(strid_t str) {
 		
 	if (res == GlkEOFChar) return -1;
 	
+	str->read++;
 	return res;
 }
 
@@ -1154,6 +1155,7 @@ glui32 glk_get_line_stream(strid_t str, char *buf, glui32 len) {
 #endif
 		
 	// Return the result
+	str->read += len;
 	return length;
 }
 
@@ -1196,6 +1198,7 @@ glui32 glk_get_buffer_stream(strid_t str, char *buf, glui32 len) {
 	NSLog(@"TRACE: glk_get_buffer_stream(%p, %p, %i) = %u", str, buf, len, length);
 #endif
 		
+	str->read += length;
 	return length;
 }
 
