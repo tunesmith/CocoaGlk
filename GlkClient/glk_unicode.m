@@ -116,8 +116,8 @@ int cocoaglk_copy_string_to_uni_buf(NSString* string, glui32* buf, glui32 len) {
 //
 glui32 glk_buffer_to_lower_case_uni(glui32 *buf, glui32 len,
 									glui32 numchars) {
-	return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, len) lowercaseString],
-										   buf, numchars);
+	return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, numchars) lowercaseString],
+										   buf, len);
 }
 
 //
@@ -138,8 +138,8 @@ glui32 glk_buffer_to_lower_case_uni(glui32 *buf, glui32 len,
 //
 glui32 glk_buffer_to_upper_case_uni(glui32 *buf, glui32 len,
 									glui32 numchars) {
-	return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, len) uppercaseString],
-										   buf, numchars);
+	return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, numchars) uppercaseString],
+										   buf, len);
 }
 
 //
@@ -152,14 +152,14 @@ glui32 glk_buffer_to_title_case_uni(glui32 *buf, glui32 len,
 									glui32 numchars, glui32 lowerrest) {
 	if (lowerrest) {
 		// If this flag is on, then use the standard capitalisation routine
-		return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, len) capitalizedString],
-											   buf, numchars);
+		return cocoaglk_copy_string_to_uni_buf([cocoaglk_string_from_uni_buf(buf, numchars) capitalizedString],
+											   buf, len);
 	} else {
 		NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 		
 		// If the flag is off, then only capitalise characters that come after whitespace
 		NSCharacterSet* whitespace = [NSCharacterSet whitespaceCharacterSet];
-		NSScanner* stringScanner = [[NSScanner alloc] initWithString: cocoaglk_string_from_uni_buf(buf, len)];
+		NSScanner* stringScanner = [[NSScanner alloc] initWithString: cocoaglk_string_from_uni_buf(buf, numchars)];
 		NSMutableString* result = [NSMutableString string];
 		
 		[stringScanner setCharactersToBeSkipped: [NSCharacterSet characterSetWithCharactersInString: @""]];
@@ -195,7 +195,7 @@ glui32 glk_buffer_to_title_case_uni(glui32 *buf, glui32 len,
 		}
 		
 		// Copy the buffer
-		int finalLength = cocoaglk_copy_string_to_uni_buf(result, buf, numchars);
+		int finalLength = cocoaglk_copy_string_to_uni_buf(result, buf, len);
 		
 		// Don't need the autorelease pool any more
 		[stringScanner release];
