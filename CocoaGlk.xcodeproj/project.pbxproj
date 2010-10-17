@@ -648,7 +648,7 @@
 		4B0459E607EA2033002D7C88 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
-				4B3C3B460F3DAB070066A760 /* git-1.2.4 */,
+				4B3C3B460F3DAB070066A760 /* git-1.2.8 */,
 				4B0459EB07EA2090002D7C88 /* GlkTest */,
 				4B0459EA07EA2087002D7C88 /* glulxe */,
 			);
@@ -726,7 +726,7 @@
 			name = Events;
 			sourceTree = "<group>";
 		};
-		4B3C3B460F3DAB070066A760 /* git-1.2.4 */ = {
+		4B3C3B460F3DAB070066A760 /* git-1.2.8 */ = {
 			isa = PBXGroup;
 			children = (
 				4B3C3BB70F3DAC0C0066A760 /* git_unix.c */,
@@ -752,7 +752,7 @@
 				4B3C3B5D0F3DAB4C0066A760 /* version.h */,
 				4B3C3B5E0F3DAB4C0066A760 /* compiler.h */,
 			);
-			path = "git-1.2.4";
+			path = "git-1.2.8";
 			sourceTree = "<group>";
 		};
 		4B51AA3207E8761B00576AB9 /* GlkApplication */ = {
