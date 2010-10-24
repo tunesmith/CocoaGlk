@@ -34,6 +34,7 @@
 		4B16BB6008A4E66B001E4C40 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 4B16BB5F08A4E66B001E4C40 /* Credits.rtfd */; };
 		4B16BBDB08A50F67001E4C40 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 4B16BB5F08A4E66B001E4C40 /* Credits.rtfd */; };
 		4B16BBDC08A50F6A001E4C40 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 4B16BB5F08A4E66B001E4C40 /* Credits.rtfd */; };
+		4B1758311274352300383C8D /* float.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B1758301274352300383C8D /* float.c */; };
 		4B30F3CC07F0B2CA006ED0BF /* GlkEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B30F3CA07F0B2CA006ED0BF /* GlkEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B30F3CD07F0B2CA006ED0BF /* GlkEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B30F3CB07F0B2CA006ED0BF /* GlkEvent.m */; };
 		4B30F3EB07F0B46F006ED0BF /* glk.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B51AA9A07E87A2F00576AB9 /* glk.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -337,6 +338,7 @@
 		4B16B77D08A0E0C7001E4C40 /* glk_hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = glk_hyperlink.m; sourceTree = "<group>"; };
 		4B16B9A708A3B88A001E4C40 /* GlkImageSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkImageSourceProtocol.h; sourceTree = "<group>"; };
 		4B16BB5D08A4E65F001E4C40 /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = Credits.rtfd; path = English.lproj/Credits.rtfd; sourceTree = "<group>"; };
+		4B1758301274352300383C8D /* float.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = float.c; sourceTree = "<group>"; };
 		4B2D3B570AB462C90038255E /* GlkTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkTypesetter.h; sourceTree = "<group>"; };
 		4B2D3B580AB462C90038255E /* GlkTypesetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlkTypesetter.m; sourceTree = "<group>"; };
 		4B30F3CA07F0B2CA006ED0BF /* GlkEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlkEvent.h; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				4B997F290F72FF1100EBE7BE /* accel.c */,
 				4B045A0307EA2171002D7C88 /* exec.c */,
 				4B045A0407EA2171002D7C88 /* files.c */,
+				4B1758301274352300383C8D /* float.c */,
 				4B045A0507EA2171002D7C88 /* funcs.c */,
 				4B045A0607EA2171002D7C88 /* gestalt.c */,
 				4B045A0707EA2171002D7C88 /* gestalt.h */,
@@ -1288,6 +1291,7 @@
 				4B1241960CAC610300CA3374 /* heap.c in Sources */,
 				4B997F2A0F72FF1100EBE7BE /* accel.c in Sources */,
 				4B997F2D0F72FF3900EBE7BE /* profile.c in Sources */,
+				4B1758311274352300383C8D /* float.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
