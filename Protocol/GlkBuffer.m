@@ -165,6 +165,7 @@ static NSString* stringFromOp(NSInvocation* op) {
 	NSInvocation* op;
 	
 	while (op = [bufferEnum nextObject]) {
+		if ([op target] == nil) [op setTarget: self];
 		[op invokeWithTarget: target];
 	}
 }
@@ -189,7 +190,10 @@ static NSString* stringFromOp(NSInvocation* op) {
 - (id)replacementObjectForPortCoder:(NSPortCoder *)encoder {
 	// This ensures that when we're passed in a bycopy way, we get passed as an actual copy and not a NSDistantObject
 	// (which would kind of defeat the whole purpose of the buffer in the first place)
-    if ([encoder isBycopy]) return self;
+    
+	// GYAHRGH, Lion is a piece of crap. Prior to this version of OS X, this could handle object graphs. Now it just crashes.
+	// If I ungraph the thing then it just seems to do nothing, and it's impossible to debug because it's refusing to set breakpoints anywhere useful.
+	// if ([encoder isBycopy]) return self;
     return [super replacementObjectForPortCoder:encoder];	
 }
 

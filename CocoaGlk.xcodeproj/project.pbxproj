@@ -1197,6 +1197,12 @@
 			buildConfigurationList = 4B6A86F5086DB1EA00BFAE69 /* Build configuration list for PBXProject "CocoaGlk" */;
 			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CocoaGlk */;
 			projectDirPath = "";
 			projectRoot = "";
