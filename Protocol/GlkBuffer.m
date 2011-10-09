@@ -216,121 +216,12 @@ static NSString* stringFromOp(NSArray* op) {
 	[operations addObject: op];
 }
 
-#if 0
-- (void) addOperation: (NSInvocation*) op {
-	// If the last operation was writing to a stream, then we might be able to merge it with this operation
-	if (([op selector] == @selector(putChar:toStream:) ||
-		[op selector] == @selector(putString:toStream:) ||
-		[op selector] == @selector(putData:toStream:))) {
-#if 0
-		// (Commented out, this currently screws up when concatenating, as we don't want to keep copying the data there)
-		// We're probably OK, though, as it's bad practice to pass in data to one of these calls that can change
-		// For data operations, ensure that the NSData object is not mutable (or is a copy)
-		if ([op selector] == @selector(putData:toStream:)) {
-			NSData* opData;
-			[op getArgument: &opData
-					atIndex: 2];
-			
-			if ([opData isKindOfClass: [NSMutableData class]]) {
-				opData = [[opData copy] autorelease];
-				[op setArgument: &opData
-						atIndex: 2];
-			}
-		}
-#endif
-		
-		int opPos = [operations count] - 1;
-		NSInvocation* lastOp = [operations lastObject];
-		int stream, lastStream;
-		
-		while (lastOp && ([lastOp selector] == @selector(putChar:toStream:) ||
-						  [lastOp selector] == @selector(putString:toStream:) ||
-						  [lastOp selector] == @selector(putData:toStream:))) {
-			// Skip backwards past 'ignorable' selectors until we find a write to this stream
-			[op getArgument: &stream
-					atIndex: 3];
-			[lastOp getArgument: &lastStream
-						atIndex: 3];
-			
-			if (stream == lastStream) break;	// We've found the 'interesting' operation
-			
-			// Go back to the previous operation
-			if (opPos > 0) {
-				opPos--;
-				lastOp = [operations objectAtIndex: opPos];
-			} else {
-				lastOp = nil;
-			}
-		}
-		
-		if (lastOp &&
-			([lastOp selector] == @selector(putChar:toStream:) ||
-			 [lastOp selector] == @selector(putString:toStream:)) &&
-			[op selector] != @selector(putData:toStream:) &&
-			stream == lastStream) {
-			// If both of these have the same stream identifier, then we might be able to merge them into one operation
-			NSString* lastString, *string;
-				
-			lastString = stringFromOp(lastOp);
-			string = stringFromOp(op);
-				
-			if (lastString && string) {
-				[operations removeObjectAtIndex: opPos];
-				[self putString: [lastString stringByAppendingString: string]
-						toStream: stream];
-				return;
-			}
-		} else if (lastOp &&
-				   [lastOp selector] == @selector(putData:toStream:) &&
-				   [op selector] == @selector(putData:toStream:) &&
-				   stream == lastStream) {
-			// Data writes can also be concatenated
-			NSData* oldData = nil;
-			[lastOp getArgument: &oldData
-						atIndex: 2];
-			
-			NSData* nextData = nil;
-			[op getArgument: &nextData
-					atIndex: 2];
-			
-			NSMutableData* newData = nil;
-			if ([oldData isKindOfClass: [NSMutableData class]]) {
-				newData = (NSMutableData*)oldData;
-			} else {
-				newData = [[oldData mutableCopy] autorelease];
-			}
-			
-			if (newData && nextData) {
-				[newData appendData: nextData];
-				[operations removeObjectAtIndex: opPos];
-				[self putData: newData
-					 toStream: stream];
-				return;
-			}
-		}
-	}
-	
-	[op retainArguments];
-	[operations addObject: op];
-}
-#endif
-
 - (BOOL) shouldBeFlushed {
 	return [operations count]>0;
 }
 
 - (BOOL) hasGotABitOnTheLargeSide {
 	return [operations count] > GlkBigBuffer;
-}
-
-- (void) flushToTarget: (id) target {
-	NSEnumerator* bufferEnum = [operations objectEnumerator];
-	NSInvocation* op;
-	
-	while (op = [bufferEnum nextObject]) {
-		if ([op target] == nil) [op setTarget: self];
-		[op invokeWithTarget: target];
-	}
 }
 
 // = NSCoding =
@@ -701,5 +592,166 @@ static NSString* stringFromOp(NSArray* op) {
 		     arguments: [NSArray arrayWithObject: [NSNumber numberWithUnsignedInt: windowIdentifier]]];
 }
 
+/// = Buffer flushing =
+
+
+- (void) flushToTarget: (id) target {
+	// Iterate through the operations
+	NSEnumerator* bufferEnum = [operations objectEnumerator];
+	NSArray* op;
+	
+	// Decode each operation in turn using a giant if statements of death
+	while (op = [bufferEnum nextObject]) {
+		NSString*	opType 	= [op objectAtIndex: 0];
+		NSArray* 	args 	= [op objectAtIndex: 1];
+			
+		// Buffering stream writes
+		if ([opType isEqualToString: s_PutCharToStream]) {
+			[self putChar: [[args objectAtIndex: 0] unsignedIntValue]
+				 toStream: [[args objectAtIndex: 1] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_PutStringToStream]) {
+			[self putString: [args objectAtIndex: 0]
+				   toStream: [[args objectAtIndex: 1] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_PutDataToStream]) {
+			[self putData: [args objectAtIndex: 0]
+				 toStream: [[args objectAtIndex: 1] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_SetStyle]) {
+			[self setStyle: [[args objectAtIndex: 0] unsignedIntValue]
+			      onStream: [[args objectAtIndex: 1] unsignedIntValue]];
+
+		// Graphics
+		} else if ([opType isEqualToString: s_FillAreaInWindowWithIdentifier]) {
+			[self fillAreaInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+				   			          withColour: [args objectAtIndex: 1]
+			                           rectangle: [[args objectAtIndex: 0] rectValue]];
+		} else if ([opType isEqualToString: s_DrawImageWithIdentifier]) {
+			[self drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+			       inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
+			                   atPosition: [[args objectAtIndex: 2] pointValue]];
+		} else if ([opType isEqualToString: s_DrawImageWithIdentifierInRect]) {
+			[self drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
+								   inRect: [[args objectAtIndex: 2] rectValue]];
+		
+		} else if ([opType isEqualToString: s_DrawImageWithIdentifierAlign]) {
+			[self drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue] 
+								alignment: [[args objectAtIndex: 2] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_DrawImageWithIdentifierAlignSize]) {
+			[self drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue] 
+								alignment: [[args objectAtIndex: 2] unsignedIntValue]
+									 size: [[args objectAtIndex: 3] sizeValue]];
+		
+		} else if ([opType isEqualToString: s_BreakFlowInWindowWithIdentifier]) {
+			[self breakFlowInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		
+		// Manipulating windows
+		} else if ([opType isEqualToString: s_MoveCursorInWindow]) {
+			[self moveCursorInWindow: [[args objectAtIndex: 0] unsignedIntValue]
+						 toXposition: [[args objectAtIndex: 1] unsignedIntValue] 
+						   yPosition: [[args objectAtIndex: 2] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_ClearWindowIdentifier]) {
+			[self clearWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_ClearWindowIdentifierWithBackground]) {
+			[self clearWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+				   withBackgroundColour: [args objectAtIndex: 1]];
+		} else if ([opType isEqualToString: s_SetInputLine]) {
+			[self setInputLine: [args objectAtIndex: 0]
+		   forWindowIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_ArrangeWindow]) {
+			[self arrangeWindow: [[args objectAtIndex: 0] unsignedIntValue]
+						 method: [[args objectAtIndex: 1] unsignedIntValue]
+						   size: [[args objectAtIndex: 2] unsignedIntValue]
+					  keyWindow: [[args objectAtIndex: 3] unsignedIntValue]];
+		
+		// Styles
+		} else if ([opType isEqualToString: s_SetStyleHint]) {
+			[self setStyleHint: [[args objectAtIndex: 0] unsignedIntValue]
+					  forStyle: [[args objectAtIndex: 1] unsignedIntValue]
+					   toValue: [[args objectAtIndex: 2] unsignedIntValue] 
+					windowType: [[args objectAtIndex: 3] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_ClearStyleHint]) {
+			[self clearStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
+						forStyle: [[args objectAtIndex: 1] unsignedIntValue] 
+					  windowType: [[args objectAtIndex: 2] unsignedIntValue]];
+		
+		} else if ([opType isEqualToString: s_SetStyleHintStream]) {
+			[self setStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
+					   toValue: [[args objectAtIndex: 1] unsignedIntValue] 
+					  inStream: [[args objectAtIndex: 2] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_ClearStyleHintStream]) {
+			[self clearStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
+						inStream: [[args objectAtIndex: 1] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_SetCustomAttributesStream]) {
+			[self setCustomAttributes: [args objectAtIndex: 0] 
+							 inStream: [[args objectAtIndex: 1] unsignedIntValue]];
+		
+		// Hyperlinks on streams
+		} else if ([opType isEqualToString: s_SetHyperlink]) {
+			[self setHyperlink: [[args objectAtIndex: 0] unsignedIntValue]
+					  onStream: [[args objectAtIndex: 1] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_ClearHyperlinkOnStream]) {
+			[self clearHyperlinkOnStream: [[args objectAtIndex: 0] unsignedIntValue]];
+		
+		// Registering streams
+		} else if ([opType isEqualToString: s_RegisterStream]) {
+			[self registerStream: [args objectAtIndex: 0] 
+				   forIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_RegisterStreamForWindow]) {
+			[self registerStreamForWindow: [[args objectAtIndex: 0] unsignedIntValue]
+							forIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
+		
+		} else if ([opType isEqualToString: s_CloseStreamIdentifier]) {
+			[self closeStreamIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_UnregisterStreamIdentifier]) {
+			[self unregisterStreamIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		
+		// Creating the various types of window
+		} else if ([opType isEqualToString: s_CreateBlankWindowWithIdentifier]) {
+			[self createBlankWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_CreateTextGridWindowWithIdentifier]) {
+			[self createTextGridWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_CreateTextWindowWithIdentifier]) {
+			[self createTextWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_CreateGraphicsWindowWithIdentifier]) {
+			[self createGraphicsWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		
+		// Placing windows in the tree
+		} else if ([opType isEqualToString: s_SetRootWindow]) {
+			[self setRootWindow: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_CreatePairWindowWithIdentifier]) {
+			[self createPairWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue] 
+									   keyWindow: [[args objectAtIndex: 1] unsignedIntValue] 
+									  leftWindow: [[args objectAtIndex: 2] unsignedIntValue] 
+									 rightWindow: [[args objectAtIndex: 3] unsignedIntValue] 
+										  method: [[args objectAtIndex: 4] unsignedIntValue] 
+											size: [[args objectAtIndex: 5] unsignedIntValue]];
+		
+		// Closing windows
+		} else if ([opType isEqualToString: s_CloseWindowIdentifier]) {
+			[self closeWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		
+		// Events
+		
+		// Requesting events
+		} else if ([opType isEqualToString: s_RequestLineEventsForWindowIdentifier]) {
+			[self requestLineEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_RequestCharEventsForWindowIdentifier]) {
+			[self requestCharEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_RequestMouseEventsForWindowIdentifier]) {
+			[self requestMouseEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_RequestHyperlinkEventsForWindowIdentifier]) {
+			[self requestHyperlinkEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		
+		} else if ([opType isEqualToString: s_CancelCharEventsForWindowIdentifier]) {
+			[self cancelCharEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_CancelMouseEventsForWindowIdentifier]) {
+			[self cancelMouseEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else if ([opType isEqualToString: s_CancelHyperlinkEventsForWindowIdentifier]) {
+			[self cancelHyperlinkEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		}
+	}
+}
 
 @end
