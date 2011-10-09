@@ -158,7 +158,8 @@
 }
 
 // Adding a generic bufferred operation
-- (void) addOperation: (NSInvocation*) operation;
+- (void) addOperation: (NSString*) name
+			arguments: (NSArray*) arguments;
 
 // Returns true if the buffer has anything to flush
 - (BOOL) shouldBeFlushed;
