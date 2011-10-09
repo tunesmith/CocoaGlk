@@ -260,15 +260,6 @@ static NSString* stringFromOp(NSArray* op) {
 	return copy;
 }
 
-// = Forwarding invocations =
-
-// Anything not specifically supported by the buffer is stored as an operation
-
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
-	// If aSelector exists in the GlkBuffer protocol, then we use that signature
-	return [super methodSignatureForSelector: aSelector];
-}
-
 // = Method invocations =
 
 // Windows
@@ -607,121 +598,121 @@ static NSString* stringFromOp(NSArray* op) {
 			
 		// Buffering stream writes
 		if ([opType isEqualToString: s_PutCharToStream]) {
-			[self putChar: [[args objectAtIndex: 0] unsignedIntValue]
+			[target putChar: [[args objectAtIndex: 0] unsignedIntValue]
 				 toStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_PutStringToStream]) {
-			[self putString: [args objectAtIndex: 0]
+			[target putString: [args objectAtIndex: 0]
 				   toStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_PutDataToStream]) {
-			[self putData: [args objectAtIndex: 0]
+			[target putData: [args objectAtIndex: 0]
 				 toStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_SetStyle]) {
-			[self setStyle: [[args objectAtIndex: 0] unsignedIntValue]
+			[target setStyle: [[args objectAtIndex: 0] unsignedIntValue]
 			      onStream: [[args objectAtIndex: 1] unsignedIntValue]];
 
 		// Graphics
 		} else if ([opType isEqualToString: s_FillAreaInWindowWithIdentifier]) {
-			[self fillAreaInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+			[target fillAreaInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   			          withColour: [args objectAtIndex: 1]
 			                           rectangle: [[args objectAtIndex: 0] rectValue]];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifier]) {
-			[self drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 			       inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
 			                   atPosition: [[args objectAtIndex: 2] pointValue]];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierInRect]) {
-			[self drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
 								   inRect: [[args objectAtIndex: 2] rectValue]];
 		
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierAlign]) {
-			[self drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue] 
 								alignment: [[args objectAtIndex: 2] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifierAlignSize]) {
-			[self drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue] 
 								alignment: [[args objectAtIndex: 2] unsignedIntValue]
 									 size: [[args objectAtIndex: 3] sizeValue]];
 		
 		} else if ([opType isEqualToString: s_BreakFlowInWindowWithIdentifier]) {
-			[self breakFlowInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target breakFlowInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		
 		// Manipulating windows
 		} else if ([opType isEqualToString: s_MoveCursorInWindow]) {
-			[self moveCursorInWindow: [[args objectAtIndex: 0] unsignedIntValue]
+			[target moveCursorInWindow: [[args objectAtIndex: 0] unsignedIntValue]
 						 toXposition: [[args objectAtIndex: 1] unsignedIntValue] 
 						   yPosition: [[args objectAtIndex: 2] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearWindowIdentifier]) {
-			[self clearWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target clearWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearWindowIdentifierWithBackground]) {
-			[self clearWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
+			[target clearWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   withBackgroundColour: [args objectAtIndex: 1]];
 		} else if ([opType isEqualToString: s_SetInputLine]) {
-			[self setInputLine: [args objectAtIndex: 0]
+			[target setInputLine: [args objectAtIndex: 0]
 		   forWindowIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ArrangeWindow]) {
-			[self arrangeWindow: [[args objectAtIndex: 0] unsignedIntValue]
+			[target arrangeWindow: [[args objectAtIndex: 0] unsignedIntValue]
 						 method: [[args objectAtIndex: 1] unsignedIntValue]
 						   size: [[args objectAtIndex: 2] unsignedIntValue]
 					  keyWindow: [[args objectAtIndex: 3] unsignedIntValue]];
 		
 		// Styles
 		} else if ([opType isEqualToString: s_SetStyleHint]) {
-			[self setStyleHint: [[args objectAtIndex: 0] unsignedIntValue]
+			[target setStyleHint: [[args objectAtIndex: 0] unsignedIntValue]
 					  forStyle: [[args objectAtIndex: 1] unsignedIntValue]
 					   toValue: [[args objectAtIndex: 2] unsignedIntValue] 
 					windowType: [[args objectAtIndex: 3] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearStyleHint]) {
-			[self clearStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
+			[target clearStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
 						forStyle: [[args objectAtIndex: 1] unsignedIntValue] 
 					  windowType: [[args objectAtIndex: 2] unsignedIntValue]];
 		
 		} else if ([opType isEqualToString: s_SetStyleHintStream]) {
-			[self setStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
+			[target setStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
 					   toValue: [[args objectAtIndex: 1] unsignedIntValue] 
 					  inStream: [[args objectAtIndex: 2] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearStyleHintStream]) {
-			[self clearStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
+			[target clearStyleHint: [[args objectAtIndex: 0] unsignedIntValue] 
 						inStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_SetCustomAttributesStream]) {
-			[self setCustomAttributes: [args objectAtIndex: 0] 
+			[target setCustomAttributes: [args objectAtIndex: 0] 
 							 inStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		
 		// Hyperlinks on streams
 		} else if ([opType isEqualToString: s_SetHyperlink]) {
-			[self setHyperlink: [[args objectAtIndex: 0] unsignedIntValue]
+			[target setHyperlink: [[args objectAtIndex: 0] unsignedIntValue]
 					  onStream: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_ClearHyperlinkOnStream]) {
-			[self clearHyperlinkOnStream: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target clearHyperlinkOnStream: [[args objectAtIndex: 0] unsignedIntValue]];
 		
 		// Registering streams
 		} else if ([opType isEqualToString: s_RegisterStream]) {
-			[self registerStream: [args objectAtIndex: 0] 
+			[target registerStream: [args objectAtIndex: 0] 
 				   forIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_RegisterStreamForWindow]) {
-			[self registerStreamForWindow: [[args objectAtIndex: 0] unsignedIntValue]
+			[target registerStreamForWindow: [[args objectAtIndex: 0] unsignedIntValue]
 							forIdentifier: [[args objectAtIndex: 1] unsignedIntValue]];
 		
 		} else if ([opType isEqualToString: s_CloseStreamIdentifier]) {
-			[self closeStreamIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target closeStreamIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_UnregisterStreamIdentifier]) {
-			[self unregisterStreamIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target unregisterStreamIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		
 		// Creating the various types of window
 		} else if ([opType isEqualToString: s_CreateBlankWindowWithIdentifier]) {
-			[self createBlankWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target createBlankWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_CreateTextGridWindowWithIdentifier]) {
-			[self createTextGridWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target createTextGridWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_CreateTextWindowWithIdentifier]) {
-			[self createTextWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target createTextWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_CreateGraphicsWindowWithIdentifier]) {
-			[self createGraphicsWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target createGraphicsWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		
 		// Placing windows in the tree
 		} else if ([opType isEqualToString: s_SetRootWindow]) {
-			[self setRootWindow: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target setRootWindow: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_CreatePairWindowWithIdentifier]) {
-			[self createPairWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue] 
+			[target createPairWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue] 
 									   keyWindow: [[args objectAtIndex: 1] unsignedIntValue] 
 									  leftWindow: [[args objectAtIndex: 2] unsignedIntValue] 
 									 rightWindow: [[args objectAtIndex: 3] unsignedIntValue] 
@@ -730,26 +721,26 @@ static NSString* stringFromOp(NSArray* op) {
 		
 		// Closing windows
 		} else if ([opType isEqualToString: s_CloseWindowIdentifier]) {
-			[self closeWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target closeWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		
 		// Events
 		
 		// Requesting events
 		} else if ([opType isEqualToString: s_RequestLineEventsForWindowIdentifier]) {
-			[self requestLineEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target requestLineEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_RequestCharEventsForWindowIdentifier]) {
-			[self requestCharEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target requestCharEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_RequestMouseEventsForWindowIdentifier]) {
-			[self requestMouseEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target requestMouseEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_RequestHyperlinkEventsForWindowIdentifier]) {
-			[self requestHyperlinkEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target requestHyperlinkEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		
 		} else if ([opType isEqualToString: s_CancelCharEventsForWindowIdentifier]) {
-			[self cancelCharEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target cancelCharEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_CancelMouseEventsForWindowIdentifier]) {
-			[self cancelMouseEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target cancelMouseEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_CancelHyperlinkEventsForWindowIdentifier]) {
-			[self cancelHyperlinkEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+			[target cancelHyperlinkEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else {
 			
 			NSLog(@"Unknown action type: %@", opType);
