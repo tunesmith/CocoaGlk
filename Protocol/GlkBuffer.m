@@ -518,7 +518,7 @@ static NSString* stringFromOp(NSArray* op) {
 		  toStream: (unsigned) streamIdentifier  {
 	[self addOperation: s_PutStringToStream
 			 arguments: [NSArray arrayWithObjects: string
-			 		  							 , streamIdentifier
+												 , [NSNumber numberWithUnsignedInt: streamIdentifier]
 			 		  							 , nil]];
 }
 
@@ -750,6 +750,9 @@ static NSString* stringFromOp(NSArray* op) {
 			[self cancelMouseEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
 		} else if ([opType isEqualToString: s_CancelHyperlinkEventsForWindowIdentifier]) {
 			[self cancelHyperlinkEventsForWindowIdentifier: [[args objectAtIndex: 0] unsignedIntValue]];
+		} else {
+			
+			NSLog(@"Unknown action type: %@", opType);
 		}
 	}
 }
