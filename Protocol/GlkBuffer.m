@@ -614,7 +614,7 @@ static NSString* stringFromOp(NSArray* op) {
 		} else if ([opType isEqualToString: s_FillAreaInWindowWithIdentifier]) {
 			[target fillAreaInWindowWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 				   			          withColour: [args objectAtIndex: 1]
-			                           rectangle: [[args objectAtIndex: 0] rectValue]];
+			                           rectangle: [[args objectAtIndex: 2] rectValue]];
 		} else if ([opType isEqualToString: s_DrawImageWithIdentifier]) {
 			[target drawImageWithIdentifier: [[args objectAtIndex: 0] unsignedIntValue]
 			       inWindowWithIdentifier: [[args objectAtIndex: 1] unsignedIntValue]
