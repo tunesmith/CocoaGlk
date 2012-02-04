@@ -36,8 +36,8 @@
 	[dataStream closeStream];
 }
 
-- (void) setPosition: (int) position
-		  relativeTo: (enum GlkSeekMode) seekMode {
+- (void) setPosition: (in int) position
+		  relativeTo: (in enum GlkSeekMode) seekMode {
 	[dataStream setPosition: position
 				 relativeTo: seekMode];
 }
@@ -48,12 +48,12 @@
 
 // Writing
 
-- (void) putChar: (unichar) ch {
+- (void) putChar: (in unichar) ch {
 	[self putString: [NSString stringWithCharacters: &ch
 											 length: 1]];
 }
 
-- (void) putString: (NSString*) string {
+- (void) putString: (in bycopy NSString*) string {
 	int len = [string length]*2;
 	glui32 buf[len];
 	
@@ -85,7 +85,7 @@
 	[self putBuffer: data];
 }
 
-- (void) putBuffer: (NSData*) buffer {
+- (void) putBuffer: (in bycopy NSData*) buffer {
 	[dataStream putBuffer: buffer];
 }
 
@@ -105,7 +105,7 @@
 		return '?';
 }
 
-- (NSString*) getLineWithLength: (int) maxLen {
+- (bycopy NSString*) getLineWithLength: (int) maxLen {
 	glui32* line = NULL;
 	int lineLength = 0;
 	int lineAllocated = 0;
@@ -137,7 +137,7 @@
 	return res;
 }
 
-- (NSData*) getBufferWithLength: (unsigned) length {
+- (bycopy NSData*) getBufferWithLength: (unsigned) length {
 	return [dataStream getBufferWithLength: length];
 }
 
