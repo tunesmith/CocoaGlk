@@ -34,21 +34,21 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 		useScreenFonts = YES;
 		scrollbackLength = 100.0;
 
-		NSFontManager* mgr = [NSFontManager sharedFontManager];
+		NSFontManager* fontManager = [NSFontManager sharedFontManager];
 		
 		// Default typography settings
 		kerning = YES;
 		ligatures = YES;
 		
 		// Default fonts are Gill Sans 12 and Courier 12
-		proportionalFont = [mgr fontWithFamily: @"Gill Sans"
-										traits: NSUnboldFontMask
-										weight: 5
-										  size: 12];
-		fixedFont = [mgr fontWithFamily: @"Courier"
-								 traits: NSUnboldFontMask
-								 weight: 5
-								   size: 12];
+		proportionalFont = [[fontManager fontWithFamily: @"Gill Sans"
+                                                traits: NSUnboldFontMask
+                                                weight: 5
+                                                  size: 12] copy];
+		fixedFont = [[fontManager fontWithFamily: @"Courier"
+                                         traits: NSUnboldFontMask
+                                         weight: 5
+                                           size: 12] copy];
 		
 		// Choose alternative fonts if our defaults are not available
 		if (proportionalFont == nil) proportionalFont = [NSFont systemFontOfSize: 12];
