@@ -544,7 +544,7 @@
 
 // Writing
 
-- (void) putChar: (unichar) ch {
+- (void) putChar: (in unichar) ch {
 	unichar buf[1];
 	
 	buf[0] = ch;
@@ -553,11 +553,11 @@
 											 length: 1]];
 }
 
-- (void) putString: (NSString*) string {
+- (void) putString: (in bycopy NSString*) string {
 	// We're blank: nothing to do
 }
 
-- (void) putBuffer: (NSData*) buffer {
+- (void) putBuffer: (in bycopy NSData*) buffer {
 	// Assume that buffers are in ISO Latin-1 format
 	NSString* string = [[[NSString alloc] initWithBytes: [buffer bytes]
 												 length: [buffer length]
@@ -577,11 +577,11 @@
 	return 0;
 }
 
-- (NSString*) getLineWithLength: (int) len {
+- (bycopy NSString*) getLineWithLength: (int) len {
 	return nil;
 }
 
-- (NSData*) getBufferWithLength: (unsigned) length {
+- (bycopy NSData*) getBufferWithLength: (unsigned) length {
 	return nil;
 }
 

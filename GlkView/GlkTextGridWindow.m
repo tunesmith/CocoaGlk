@@ -238,7 +238,7 @@
 
 // = Streams =
 
-- (void) putString: (NSString*) string {
+- (void) putString: (in bycopy NSString*) string {
 	int pos = 0;
 	
 	[containingView performLayoutIfNecessary];

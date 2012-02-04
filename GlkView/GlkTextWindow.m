@@ -64,6 +64,7 @@
 	[textView setHorizontallyResizable:NO];
 	[textView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
 	[textView setEditable: NO];
+    [textView setRichText: YES];
 	[textView setUsesFindPanel: YES]; // FIXME: Won't work on Jaguar
 	
 	inputPos = 0;
@@ -645,7 +646,7 @@
 
 // = Streaming =
 
-- (void) putString: (NSString*) string {
+- (void) putString: (in bycopy NSString*) string {
 	NSAttributedString* atStr = [[NSAttributedString alloc] initWithString: string
 																attributes: [self currentTextAttributes]];
 	

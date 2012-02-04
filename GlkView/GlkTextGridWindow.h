@@ -11,7 +11,7 @@
 #import <GlkView/GlkWindow.h>
 #import <GlkView/GlkTextWindow.h>
 
-@interface GlkTextGridWindow : GlkTextWindow {
+@interface GlkTextGridWindow : GlkTextWindow<NSTextStorageDelegate, NSTextViewDelegate> {
 	int lineInputLength;							// The amount of line input that we have accepted so far
 	
 	int width,height;								// Current character width/height

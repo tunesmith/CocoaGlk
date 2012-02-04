@@ -368,7 +368,7 @@
 	}
 }
 
-- (void) showError: (NSString*) error {
+- (void) showError: (in bycopy NSString*) error {
 	[self logMessage: [NSString stringWithFormat: @"Client error: %@", error]
 		  withStatus: GlkLogError];
 	
@@ -390,7 +390,7 @@
 	}
 }
 
-- (void) showWarning: (NSString*) warning {
+- (void) showWarning: (in bycopy NSString*) warning {
 	[self logMessage: [NSString stringWithFormat: @"Client warning: %@", warning]
 		  withStatus: GlkLogWarning];
 
@@ -722,7 +722,7 @@
 
 // Buffering
 
-- (void) performOperationsFromBuffer: (GlkBuffer*) buffer {
+- (void) performOperationsFromBuffer: (in bycopy GlkBuffer*) buffer {
 	if (flushing) {
 		NSLog(@"WARNING: buffer flush deferred to avoid out-of-order data");
 		
@@ -805,7 +805,7 @@
 
 // Streams
 
-- (NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId {
+- (byref NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId {
 	GlkWindow* window = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowId]];
 	
 	if (window) {
@@ -815,11 +815,11 @@
 	}
 }
 
-- (NSObject<GlkStream>*) inputStream {
+- (byref NSObject<GlkStream>*) inputStream {
 	return inputStream;
 }
 
-- (NSObject<GlkStream>*) streamForKey: (NSString*) key {
+- (byref NSObject<GlkStream>*) streamForKey: (in bycopy NSString*) key {
 	return [extraStreamDictionary objectForKey: key];
 }
 
@@ -924,7 +924,7 @@
 
 // Events
 
-- (NSObject<GlkEvent>*) nextEvent {
+- (bycopy NSObject<GlkEvent>*) nextEvent {
 	if ([events count] > 0) {
 		// Get the next event from the queue
 		GlkEvent* nextEvent = [[[events objectAtIndex: 0] retain] autorelease];
@@ -943,7 +943,7 @@
 	}
 }
 
-- (void) setEventListener: (NSObject<GlkEventListener>*) newListener {
+- (void) setEventListener: (in byref NSObject<GlkEventListener>*) newListener {
 	[listener autorelease]; listener = nil;
 	
 	// Inform any input automation objects that if they've got events waiting, then now is the time to fire them
@@ -989,7 +989,7 @@
 
 // Filerefs
 
-- (NSObject<GlkFileRef>*) fileRefWithName: (NSString*) name {
+- (NSObject<GlkFileRef>*) fileRefWithName: (in bycopy NSString*) name {
 	// Turn into a 'real' path
 	NSString* path = [self pathForNamedFile: name];
 	if (!path) return nil;
@@ -1031,14 +1031,14 @@
 	if (!promptHandler) return;
 	
 	if (returnCode == NSOKButton) {
-		GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [panel filename]];
+		GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [[panel URL] path]];
 		[promptHandler promptedFileRef: promptRef];
 		[promptRef autorelease];
 		
-		[[NSUserDefaults standardUserDefaults] setObject: [panel directory]
+		[[NSUserDefaults standardUserDefaults] setObject: [[panel directoryURL] path]
 												  forKey: @"GlkSaveDirectory"];
 		if (delegate && [delegate respondsToSelector: @selector(savePreferredDirectory:)]) {
-			[delegate savePreferredDirectory: [panel directory]];
+			[delegate savePreferredDirectory: [[panel directoryURL] path]];
 		}
 	} else {
 		[promptHandler promptCancelled];
@@ -1049,7 +1049,7 @@
 	[lastPanel release]; lastPanel = nil;
 }
 
-- (NSArray*) fileTypesForUsage: (NSString*) usage {
+- (bycopy NSArray*) fileTypesForUsage: (in bycopy NSString*) usage {
 	// Get the user-set value (if any)
 	NSArray* result = [[[extensionsForUsage objectForKey: usage] retain] autorelease];
 	if (result) return result;
@@ -1072,15 +1072,15 @@
 	return nil;
 }
 
-- (void) setFileTypes: (NSArray*) extensions
-			 forUsage: (NSString*) usage {
+- (void) setFileTypes: (in bycopy NSArray*) extensions
+			 forUsage: (in bycopy NSString*) usage {
 	[extensionsForUsage setObject: [[[NSArray alloc] initWithArray: extensions copyItems: YES] autorelease]
 						   forKey: usage];
 }
 
-- (void) promptForFilesForUsage: (NSString*) usage
+- (void) promptForFilesForUsage: (in bycopy NSString*) usage
 					 forWriting: (BOOL) writing
-						handler: (NSObject<GlkFilePrompt>*) handler {
+						handler: (in byref NSObject<GlkFilePrompt>*) handler {
 	// Pick a preferred directory
 	NSString* preferredDirectory = nil;
 	
@@ -1109,9 +1109,9 @@
 					   handler: handler];
 }
 
-- (void) promptForFilesOfType: (NSArray*) filetypes
+- (void) promptForFilesOfType: (in bycopy NSArray*) filetypes
 				   forWriting: (BOOL) writing
-					  handler: (NSObject<GlkFilePrompt>*) handler {
+					  handler: (in byref NSObject<GlkFilePrompt>*) handler {
 	// If we don't have a window, we can't show a dialog, so we can't get a filename
 	if (![self window]) {
 		[handler promptCancelled];
@@ -1154,8 +1154,8 @@
 		// Create a save dialog
 		NSSavePanel* panel = [NSSavePanel savePanel];
 		
-		[panel setRequiredFileType: [allowedFiletypes objectAtIndex: 0]];
-		if (preferredDirectory != nil) [panel setDirectory: preferredDirectory];
+		[panel setAllowedFileTypes: allowedFiletypes];
+		if (preferredDirectory != nil) [panel setDirectoryURL: [NSURL fileURLWithPath: preferredDirectory]];
 		
 		if ([panel respondsToSelector: @selector(setAllowedFileTypes:)]) {
 			// Only works on 10.3
@@ -1174,8 +1174,8 @@
 		// Create an open dialog
 		NSOpenPanel* panel = [NSOpenPanel openPanel];
 
-		[panel setRequiredFileType: [allowedFiletypes objectAtIndex: 0]];
-		if (preferredDirectory != nil) [panel setDirectory: preferredDirectory];
+		[panel setAllowedFileTypes: allowedFiletypes];
+		if (preferredDirectory != nil) [panel setDirectoryURL: [NSURL fileURLWithPath: preferredDirectory]];
 		
 		if ([panel respondsToSelector: @selector(setAllowedFileTypes:)]) {
 			// Only works on 10.3
@@ -1441,7 +1441,7 @@
 }
 
 - (void) clearWindowIdentifier: (glui32) identifier 
-		  withBackgroundColour: (NSColor*) bgCol {
+		  withBackgroundColour: (in bycopy NSColor*) bgCol {
 	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
 	
 	if (!win) {
@@ -1456,7 +1456,7 @@
 	[win clearWindow];
 }
 
-- (void) setInputLine: (NSString*) inputLine
+- (void) setInputLine: (in bycopy NSString*) inputLine
   forWindowIdentifier: (unsigned) identifier {
 	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
 	
@@ -1709,7 +1709,7 @@
 
 // Registering streams
 
-- (void) registerStream: (NSObject<GlkStream>*) stream
+- (void) registerStream: (in byref NSObject<GlkStream>*) stream
 		  forIdentifier: (unsigned) streamIdentifier {
 	[glkStreams setObject: stream
 				   forKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
@@ -1790,7 +1790,7 @@
 	[stream putChar: ch];
 }
 
-- (void) putString: (NSString*) string
+- (void) putString: (in bycopy NSString*) string
 		  toStream: (unsigned) streamIdentifier {
 	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
@@ -1807,7 +1807,7 @@
 	[stream putString: [NSString stringWithString: string]];
 }
 
-- (void) putData: (NSData*) data
+- (void) putData: (in bycopy NSData*) data
 		toStream: (unsigned) streamIdentifier {
 	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
@@ -1963,7 +1963,7 @@
 	[win requestHyperlinkInput];
 }
 
-- (NSString*) cancelLineEventsForWindowIdentifier: (unsigned) windowIdentifier {
+- (bycopy NSString*) cancelLineEventsForWindowIdentifier: (unsigned) windowIdentifier {
 	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
 	
 	if (!win) {
@@ -2009,11 +2009,11 @@
 
 // = Image management =
 
-- (void) setImageSource: (id<GlkImageSource>) source {
+- (void) setImageSource: (in byref id<GlkImageSource>) source {
 	imgSrc = [(NSObject<GlkImageSource>*)source retain];
 }
 
-- (id<GlkImageSource>) imageSource {
+- (out byref id<GlkImageSource>) imageSource {
 	return [[imgSrc retain] autorelease];
 }
 
@@ -2127,7 +2127,7 @@
 }
 
 - (void) fillAreaInWindowWithIdentifier: (unsigned) windowIdentifier
-							 withColour: (NSColor*) col
+							 withColour: (in bycopy NSColor*) col
 							  rectangle: (NSRect) rect {
 	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
 	
@@ -2379,7 +2379,7 @@
 
 // = Writing log messages =
 
-- (void) logMessage: (NSString*) message {
+- (void) logMessage: (in bycopy NSString*) message {
 	[self logMessage: message
 		  withStatus: GlkLogCustom];
 }

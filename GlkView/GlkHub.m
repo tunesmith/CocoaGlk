@@ -165,13 +165,13 @@
 								 sessionCookie: nil];
 }
 
-- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie {
+- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie {
 	return [self createNewSessionWithHubCookie: hubCookie
 								 sessionCookie: nil];
 }
 
-- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie
-										  sessionCookie: (NSString*) sessionCookie {
+- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie
+                                                sessionCookie: (in bycopy NSString*) sessionCookie {
 	if (sessionCookie == nil) {
 		return [self createAnonymousSession];
 	} else {
