@@ -160,17 +160,17 @@
 
 // = Setting up the session =
 
-- (NSObject<GlkSession>*) createNewSession {
+- (byref NSObject<GlkSession>*) createNewSession {
 	return [self createNewSessionWithHubCookie: nil
 								 sessionCookie: nil];
 }
 
-- (NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie {
+- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie {
 	return [self createNewSessionWithHubCookie: hubCookie
 								 sessionCookie: nil];
 }
 
-- (NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie
+- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie
 										  sessionCookie: (NSString*) sessionCookie {
 	if (sessionCookie == nil) {
 		return [self createAnonymousSession];

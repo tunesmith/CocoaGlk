@@ -1017,7 +1017,7 @@
 	
 	mktemp(tempName);
 	
-	NSString* tempPath = [tempDir stringByAppendingPathComponent: [NSString stringWithCString: tempName]];
+	NSString* tempPath = [tempDir stringByAppendingPathComponent: [NSString stringWithCString: tempName encoding: NSUTF8StringEncoding]];
 	
 	// Turn into a temporary fileref
 	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: tempPath];

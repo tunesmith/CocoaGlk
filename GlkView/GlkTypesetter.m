@@ -1493,26 +1493,26 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 - (NSRange) paragraphGlyphRange {
 	if ([super respondsToSelector: @selector(paragraphGlyphRange)]) {
-		return [(id)super paragraphGlyphRange];
+		return [super paragraphGlyphRange];
 	} else {
 		return NSMakeRange(0,0);
 	}
 }
 
 - (void) beginParagraph {
-	[(id)super beginParagraph];
+	[super beginParagraph];
 }
 
 - (void) endParagraph {
-	[(id)super endParagraph];
+	[super endParagraph];
 }
 
 - (void)beginLineWithGlyphAtIndex:(unsigned)glyphIndex {
-	[(id)super beginLineWithGlyphAtIndex: glyphIndex];
+	[super beginLineWithGlyphAtIndex: glyphIndex];
 }
 
 - (void)endLineWithGlyphRange:(NSRange)lineGlyphRange {
-	[(id)super endLineWithGlyphRange: lineGlyphRange];
+	[super endLineWithGlyphRange: lineGlyphRange];
 }
 
 - (unsigned int)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigi {
