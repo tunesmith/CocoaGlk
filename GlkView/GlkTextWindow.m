@@ -1097,6 +1097,7 @@
 
 - (NSArray*) accessibilityAttributeNames {
 	NSMutableArray* result = [[super accessibilityAttributeNames] mutableCopy];
+	if (!result) result = [[NSMutableArray alloc] init];
 	
 	[result addObjectsFromArray:[NSArray arrayWithObjects: 
 		NSAccessibilityContentsAttribute,

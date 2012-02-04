@@ -576,7 +576,8 @@
 }
 
 - (NSArray*) accessibilityAttributeNames {
-	NSMutableArray* result = [[super accessibilityAttributeNames] mutableCopy];
+	NSMutableArray* result = [[[super accessibilityAttributeNames] mutableCopy] autorelease];
+	if (!result) result = [[[NSMutableArray alloc] init] autorelease];
 	
 	[result addObjectsFromArray:[NSArray arrayWithObjects: 
 		NSAccessibilityHelpAttribute,
