@@ -15,21 +15,22 @@
 
 // = Initialisation =
 
-- (id) initForReadWriteWithFilename: (NSString*) filename {
+- (id) initForReadWriteWithFilename: (NSURL*) filename {
 	self = [super init];
 	
 	if (self) {
-		handle = [[NSFileHandle fileHandleForUpdatingAtPath: filename] retain];
+		handle = [[NSFileHandle fileHandleForUpdatingURL: filename error: nil] retain];
 		
 		if (!handle) {
-			if (![[NSFileManager defaultManager] createFileAtPath: filename
+			if (![filename isFileURL]
+                || ![[NSFileManager defaultManager] createFileAtPath: [filename path]
 														 contents: [NSData data]
 													   attributes: nil]) {
 				[self release];
 				return nil;
 			}			
 
-			handle = [[NSFileHandle fileHandleForUpdatingAtPath: filename] retain];
+			handle = [[NSFileHandle fileHandleForUpdatingURL: filename error: nil] retain];
 		}
 		
 		if (!handle) {
@@ -41,18 +42,19 @@
 	return self;
 }
 
-- (id) initForWritingWithFilename: (NSString*) filename {
+- (id) initForWritingWithFilename: (NSURL*) filename {
 	self = [super init];
 	
 	if (self) {
-		if (![[NSFileManager defaultManager] createFileAtPath: filename
-													 contents: [NSData data]
-												   attributes: nil]) {
-			[self release];
-			return nil;
-		}
+        if (![filename isFileURL]
+            || ![[NSFileManager defaultManager] createFileAtPath: [filename path]
+                                                        contents: [NSData data]
+                                                      attributes: nil]) {
+				[self release];
+				return nil;
+			}			
 		
-		handle = [[NSFileHandle fileHandleForWritingAtPath: filename] retain];
+		handle = [[NSFileHandle fileHandleForWritingToURL: filename error: nil] retain];
 		
 		if (!handle) {
 			[self release];
@@ -65,11 +67,11 @@
 	return self;
 }
 
-- (id) initForReadingWithFilename: (NSString*) filename {
+- (id) initForReadingWithFilename: (NSURL*) filename {
 	self = [super init];
 	
 	if (self) {
-		handle = [[NSFileHandle fileHandleForReadingAtPath: filename] retain];
+		handle = [[NSFileHandle fileHandleForReadingFromURL: filename error: nil] retain];
 		
 		if (!handle) {
 			[self release];

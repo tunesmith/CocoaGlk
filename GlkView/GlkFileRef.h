@@ -11,13 +11,13 @@
 #import "GlkFileRefProtocol.h"
 
 @interface GlkFileRef : NSObject<GlkFileRef> {
-	NSString* pathname;
+	NSURL* pathname;
 	
 	BOOL temporary;
 	BOOL autoflush;
 }
 
-- (id) initWithPath: (NSString*) pathname;				// Designated initialiser
+- (id) initWithPath: (NSURL*) pathname;                 // Designated initialiser
 
 - (void) setTemporary: (BOOL) isTemp;					// Temporary filerefs are deleted when deallocated
 

@@ -14,11 +14,11 @@
 
 // = Initialisation =
 
-- (id) initWithPath: (NSString*) path {
+- (id) initWithPath: (NSURL*) path {
 	self = [super init];
 	
 	if (self) {
-		pathname = [[path stringByStandardizingPath] copy];
+		pathname = [[path URLByStandardizingPath] copy];
 		temporary = NO;
 		
 		[[NSNotificationCenter defaultCenter] addObserver: self
@@ -37,9 +37,9 @@
 		NSLog(@"Removing temporary file: %@", pathname);
 
 		// Delete any temporary files when deallocated
-		[[NSFileManager defaultManager] removeFileAtPath: pathname 
-												 handler: nil];
-	}
+		[[NSFileManager defaultManager] removeItemAtURL: pathname 
+                                                  error: nil];
+    }
 	
 	[pathname release]; pathname = nil;
 	
@@ -51,8 +51,8 @@
 		NSLog(@"Removing temporary file: %@", pathname);
 		
 		// Also delete any temporary files when the application terminates
-		[[NSFileManager defaultManager] removeFileAtPath: pathname 
-												 handler: nil];
+		[[NSFileManager defaultManager] removeItemAtURL: pathname
+                                                  error: nil];
 	}
 }
 
@@ -83,12 +83,11 @@
 }
 
 - (void) deleteFile {
-	[[NSFileManager defaultManager] removeFileAtPath: pathname 
-											 handler: nil];
-}
+	[[NSFileManager defaultManager] removeItemAtURL: pathname error: nil];}
 
 - (BOOL) fileExists {
-	return [[NSFileManager defaultManager] fileExistsAtPath: pathname];
+    if (![pathname isFileURL]) return NO;
+	return [[NSFileManager defaultManager] fileExistsAtPath: [pathname path]];
 }
 
 - (void) setAutoflush: (BOOL) newAutoflush {

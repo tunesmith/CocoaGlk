@@ -664,7 +664,7 @@
 		extraStreamDictionary = [[NSMutableDictionary alloc] init];
 	}
 	
-	[extraStreamDictionary setObject: [[GlkFileStream alloc] initForReadingWithFilename: filename]
+	[extraStreamDictionary setObject: [[GlkFileStream alloc] initForReadingWithFilename: [NSURL fileURLWithPath: filename]]
 							  forKey: streamKey];
 	
 	[self logMessage: [NSString stringWithFormat: @"Creating stream to read data from '%@' with key '%@'", filename, streamKey]
@@ -681,7 +681,7 @@
 
 - (void) setInputFilename: (NSString*) filename {
 	[inputStream release]; inputStream = nil;
-	inputStream = [[GlkFileStream alloc] initForReadingWithFilename: filename];
+	inputStream = [[GlkFileStream alloc] initForReadingWithFilename: [NSURL fileURLWithPath: filename]];
 	
 	[self logMessage: [NSString stringWithFormat: @"Will read data from: %@", filename]
 		  withStatus: GlkLogRoutine];
@@ -998,7 +998,7 @@
 		  withStatus: GlkLogInformation];
 	
 	// Then turn into a GlkFileRef
-	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: path];
+	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: [NSURL fileURLWithPath: path]];
 	return [res autorelease];
 }
 
@@ -1020,7 +1020,7 @@
 	NSString* tempPath = [tempDir stringByAppendingPathComponent: [NSString stringWithCString: tempName encoding: NSUTF8StringEncoding]];
 	
 	// Turn into a temporary fileref
-	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: tempPath];
+	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: [NSURL fileURLWithPath: tempPath]];
 	[res setTemporary: YES];
 	return [res autorelease];
 }
@@ -1031,7 +1031,7 @@
 	if (!promptHandler) return;
 	
 	if (returnCode == NSOKButton) {
-		GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [[panel URL] path]];
+		GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [panel URL]];
 		[promptHandler promptedFileRef: promptRef];
 		[promptRef autorelease];
 		
