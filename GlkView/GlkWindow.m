@@ -673,18 +673,25 @@
 }
 
 - (NSArray*) accessibilityAttributeNames {
-	NSMutableArray* result = [[[super accessibilityAttributeNames] mutableCopy] autorelease];
-	if (!result)	result = [[[NSMutableArray alloc] init] autorelease];
-	
-	[result addObjectsFromArray:[NSArray arrayWithObjects: 
-		NSAccessibilityChildrenAttribute,
-		NSAccessibilityFocusedAttribute,
-		nil]];
-	
-	return result;
+    // Attributes we support
+    static NSArray* attributes = nil;
+    
+    // Populate the attributes on the first call
+    if (!attributes) {
+        attributes = [[[super accessibilityAttributeNames] 
+                       arrayByAddingObjectsFromArray: [NSArray arrayWithObjects: 
+                                                       NSAccessibilityChildrenAttribute, 
+                                                       NSAccessibilityFocusedAttribute,
+                                                       nil]] retain];
+    }
+    
+    // Return as the result
+    return attributes;
 }
 
 - (id)accessibilityAttributeValue:(NSString *)attribute {
+	NSLog(@"%@ %@", [self class], attribute);
+    
 	if ([attribute isEqualToString: NSAccessibilityChildrenAttribute]) {
 		//return [NSArray array];
 	} else if ([attribute isEqualToString: NSAccessibilityRoleDescriptionAttribute]) {

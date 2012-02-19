@@ -575,6 +575,8 @@
 // = NSAccessibility =
 
 - (id)accessibilityAttributeValue:(NSString *)attribute {
+	NSLog(@"%@ %@", [self class], attribute);
+    
 	if ([attribute isEqualToString: NSAccessibilityRoleDescriptionAttribute]) {
 		if (!lineInput && !charInput) return @"Text grid";
 		return [NSString stringWithFormat: @"GLK text grid window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];;

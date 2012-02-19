@@ -1097,22 +1097,29 @@
 }
 
 - (NSArray*) accessibilityAttributeNames {
-	NSMutableArray* result = [[super accessibilityAttributeNames] mutableCopy];
-	if (!result) result = [[NSMutableArray alloc] init];
-	
-	[result addObjectsFromArray:[NSArray arrayWithObjects: 
-		NSAccessibilityContentsAttribute,
-		NSAccessibilityHelpAttribute,
-		nil]];
-	
-	return [result autorelease];
+    // Attributes we support
+    static NSArray* attributes = nil;
+    
+    // Populate the attributes on the first call
+    if (!attributes) {
+        attributes = [[[super accessibilityAttributeNames] 
+                       arrayByAddingObjectsFromArray: [NSArray arrayWithObjects: 
+                                                       NSAccessibilityContentsAttribute, 
+                                                       NSAccessibilityHelpAttribute,
+                                                       nil]] retain];
+    }
+    
+    // Return as the result
+    return attributes;
 }
 
 - (id)accessibilityAttributeValue:(NSString *)attribute {
+	NSLog(@"%@ %@", [self class], attribute);
+    
 	if ([attribute isEqualToString: NSAccessibilityContentsAttribute]) {
 		return textView;
 	} else if ([attribute isEqualToString: NSAccessibilityParentAttribute]) {
-		//return parentWindow;
+		return parentWindow;
 	} else if ([attribute isEqualToString: NSAccessibilityRoleDescriptionAttribute]) {
 		if (!lineInput && !charInput) return @"Text window";
 		return [NSString stringWithFormat: @"GLK text window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];;

@@ -2554,19 +2554,24 @@ static BOOL pageAllFrom(GlkWindow* win) {
 }
 
 - (NSArray*) accessibilityAttributeNames {
-	NSMutableArray* result = [[[super accessibilityAttributeNames] mutableCopy] autorelease];
-	if (!result) result = [[[NSMutableArray alloc] init] autorelease];
-	
-	[result addObjectsFromArray:[NSArray arrayWithObjects: 
-		NSAccessibilityContentsAttribute,
-		NSAccessibilityChildrenAttribute,
-		NSAccessibilityHelpAttribute,
-		NSAccessibilityDescriptionAttribute,
-		NSAccessibilityTitleAttribute,
-		NSAccessibilityFocusedUIElementAttribute,
-		nil]];
-	
-	return result;
+    // Attributes we support
+    static NSArray* attributes = nil;
+    
+    // Populate the attributes on the first call
+    if (!attributes) {
+        attributes = [[[super accessibilityAttributeNames] 
+                       arrayByAddingObjectsFromArray: [NSArray arrayWithObjects: 
+                                                       NSAccessibilityContentsAttribute, 
+                                                       NSAccessibilityChildrenAttribute,
+                                                       NSAccessibilityHelpAttribute,
+                                                       NSAccessibilityDescriptionAttribute,
+                                                       NSAccessibilityTitleAttribute,
+                                                       NSAccessibilityFocusedUIElementAttribute,
+                                                       nil]] retain];
+    }
+    
+    // Return as the result
+    return attributes;
 }
 
 - (id) accessibilityFocusedUIElement {
@@ -2590,9 +2595,11 @@ static BOOL pageAllFrom(GlkWindow* win) {
 }
 
 - (id)accessibilityAttributeValue:(NSString *)attribute {
+	NSLog(@"%@ %@", [self class], attribute);
+
 	if ([attribute isEqualToString: NSAccessibilityChildrenAttribute]
 		|| [attribute isEqualToString: NSAccessibilityContentsAttribute]) {
-		//return [NSArray arrayWithObjects: rootWindow, nil];
+		return [NSArray arrayWithObjects: rootWindow, nil];
 	} else if ([attribute isEqualToString: NSAccessibilityFocusedUIElementAttribute]) {
 		return [self accessibilityFocusedUIElement];
 	} else if ([attribute isEqualToString: NSAccessibilityHelpAttribute]
@@ -2607,9 +2614,6 @@ static BOOL pageAllFrom(GlkWindow* win) {
 	} else if ([attribute isEqualToString: NSAccessibilityRoleAttribute]) {
 		return NSAccessibilityGroupRole;
 	}
-	
-
-	NSLog(@"%@", attribute);
 
 	return [super accessibilityAttributeValue: attribute];
 }
