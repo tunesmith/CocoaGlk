@@ -172,7 +172,9 @@
 }
 
 - (float) lineHeight {
-	return [[[self currentTextAttributes] objectForKey: NSFontAttributeName] defaultLineHeightForFont];
+    NSLayoutManager* layoutManager = [[[NSLayoutManager alloc] init] autorelease];
+    
+	return [layoutManager defaultLineHeightForFont: [[self currentTextAttributes] objectForKey: NSFontAttributeName]];
 }
 
 - (void) setStyles: (NSDictionary*) newStyles {
