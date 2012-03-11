@@ -309,7 +309,7 @@
 
 - (BOOL) textView: (NSTextView*) view
 	clickedOnLink: (id) link 
-		  atIndex: (unsigned) charIndex {
+		  atIndex: (NSUInteger) charIndex {
 	if ([link isKindOfClass: [NSNumber class]]) {
 		if (hyperlinkInput) {
 			// Generate the event for this hyperlink

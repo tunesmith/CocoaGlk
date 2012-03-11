@@ -41,7 +41,7 @@
 	[self beginLineFragment];
 	
 	// Work out where in the grid we are currently located
-	int charIndex = cacheCharIndexes[glyph];
+	unsigned charIndex = cacheCharIndexes[glyph];
 	int x = charIndex % gridWidth;
 	int y = charIndex / gridWidth;
 	NSPoint gridPos = NSMakePoint(cellSize.width*x+inset, cellSize.height*y);
@@ -51,7 +51,7 @@
 	
 	// Perform layout for as many characters as possible
 	int firstGlyph = glyph;
-	int lastChar = cacheCharIndexes[glyph];
+	unsigned lastChar = cacheCharIndexes[glyph];
 	float charWidth = 0;
 	int lastBoundaryGlyph = glyph;
 	BOOL hitTheLastGlyph = NO;
@@ -60,7 +60,7 @@
 									   cacheAdvancements[glyph], cacheLineHeight[glyph]);
 	
 	while (x < gridWidth && glyph < cached.length) {
-		int thisChar = cacheCharIndexes[glyph];
+		unsigned thisChar = cacheCharIndexes[glyph];
 		
 		if (thisChar != lastChar) {
 			// We're advancing to the next character

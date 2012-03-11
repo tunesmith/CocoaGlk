@@ -341,7 +341,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Get the glyphs and character indexes from the layout manager
 	NSGlyph glyphs[cacheRange.length+1];
-	unsigned charIndexes[cacheRange.length+1];
+	NSUInteger charIndexes[cacheRange.length+1];
 	NSGlyphInscription inscriptions[cacheRange.length+1];
 	BOOL elastic[cacheRange.length+1];
 	unsigned char bidi[cacheRange.length+1];					// NOT YET USED
@@ -939,19 +939,19 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		newlineSet = [[NSCharacterSet characterSetWithCharactersInString: @"\n\r"] retain];
 	}
 	
-	int thisChar = cacheCharIndexes[glyph-cached.location];
-	int nextBreak = [[storage string] rangeOfCharacterFromSet: newlineSet
+	NSUInteger thisChar = cacheCharIndexes[glyph-cached.location];
+	NSRange nextBreak = [[storage string] rangeOfCharacterFromSet: newlineSet
 													  options: NSLiteralSearch
-														range: NSMakeRange(thisChar, [[storage string] length] - thisChar)].location;
+														range: NSMakeRange(thisChar, [[storage string] length] - thisChar)];
 	
-	if (nextBreak == NSNotFound) {
-		nextBreak = [[storage string] length];
+	if (nextBreak.location == NSNotFound) {
+		nextBreak.location = [[storage string] length];
 	} else {
-		nextBreak++;
+		nextBreak.location++;
 	}
 	
 	// Work out the range this represents (in terms of glyphs)
-	NSRange charRange = NSMakeRange(thisChar, nextBreak-thisChar);
+	NSRange charRange = NSMakeRange(thisChar, nextBreak.location-thisChar);
 	paragraph = [layout glyphRangeForCharacterRange: charRange
 							   actualCharacterRange: &charRange];
 	
@@ -1402,7 +1402,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 // = NSTypesetter overrides =
 
 - (void) prepareForLayoutInLayoutManager: (NSLayoutManager*) layoutMgr
-					startingAtGlyphIndex: (unsigned) startGlyphIndex {
+					startingAtGlyphIndex: (NSUInteger) startGlyphIndex {
 	// Setup: get the things that we're gong to layout
 	NSAttributedString* newStorage	= [layoutMgr attributedString];
 	NSLayoutManager* newLayout		= layoutMgr;
@@ -1438,9 +1438,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 }
 
 - (void) layoutGlyphsInLayoutManager: (NSLayoutManager*) layoutMgr 
-				startingAtGlyphIndex: (unsigned) startGlyphIndex 
-			maxNumberOfLineFragments: (unsigned) maxNumLines 
-					  nextGlyphIndex: (unsigned*) nextGlyph {
+				startingAtGlyphIndex: (NSUInteger) startGlyphIndex 
+			maxNumberOfLineFragments: (NSUInteger) maxNumLines 
+					  nextGlyphIndex: (NSUInteger*) nextGlyph {
 	// Deal with the case where there are no text containers to perform layout in
 #if 0
 	if ([containers count] <= 0) {
@@ -1507,7 +1507,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	[super endParagraph];
 }
 
-- (void)beginLineWithGlyphAtIndex:(unsigned)glyphIndex {
+- (void)beginLineWithGlyphAtIndex:(NSUInteger)glyphIndex {
 	[super beginLineWithGlyphAtIndex: glyphIndex];
 }
 
@@ -1515,7 +1515,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	[super endLineWithGlyphRange: lineGlyphRange];
 }
 
-- (unsigned int)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigi {
+- (NSUInteger)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigi {
 	// Get the glyph range that we're laying out
 	NSRange glyphRange = [self paragraphGlyphRange];
 	int glyph = glyphRange.location;
@@ -1530,19 +1530,19 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		newlineSet = [[NSCharacterSet characterSetWithCharactersInString: @"\n\r"] retain];
 	}
 	
-	int thisChar = cacheCharIndexes[glyph-cached.location];
-	int nextBreak = [[storage string] rangeOfCharacterFromSet: newlineSet
-													  options: NSLiteralSearch
-														range: NSMakeRange(thisChar, [[storage string] length] - thisChar)].location;
+	NSUInteger thisChar = cacheCharIndexes[glyph-cached.location];
+	NSRange nextBreak = [[storage string] rangeOfCharacterFromSet: newlineSet
+                                                          options: NSLiteralSearch
+                                                            range: NSMakeRange(thisChar, [[storage string] length] - thisChar)];
 	
-	if (nextBreak == NSNotFound) {
-		nextBreak = [[storage string] length];
+	if (nextBreak.location == NSNotFound) {
+		nextBreak.location = [[storage string] length];
 	} else {
-		nextBreak++;
+		nextBreak.location++;
 	}
 	
 	// Work out the range this represents (in terms of glyphs)
-	NSRange charRange = NSMakeRange(thisChar, nextBreak-thisChar);
+	NSRange charRange = NSMakeRange(thisChar, nextBreak.location-thisChar);
 	NSRange paragraphRange = [layout glyphRangeForCharacterRange: charRange
 									   actualCharacterRange: &charRange];
 	
