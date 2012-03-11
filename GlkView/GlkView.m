@@ -21,13 +21,6 @@
 #import "GlkHub.h"
 #import "GlkFileStream.h"
 
-
-#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_4
-
-#define NSAccessibilityDescriptionAttribute NSAccessibilityHelpAttribute
-
-#endif
-
 @interface GlkView(Private)
 
 - (void) setFirstResponder;
@@ -2530,96 +2523,5 @@ static BOOL pageAllFrom(GlkWindow* win) {
 }
 
 // = Accessibility =
-
-- (NSString *)accessibilityActionDescription: (NSString*) action {
-	return [super accessibilityActionDescription:  action];
-}
-
-- (NSArray *)accessibilityActionNames {
-	return [super accessibilityActionNames];
-}
-
-- (BOOL)accessibilityIsAttributeSettable:(NSString *)attribute {
-	return [super accessibilityIsAttributeSettable: attribute];;
-}
-
-- (void)accessibilityPerformAction:(NSString *)action {
-	[super accessibilityPerformAction: action];
-}
-
-- (void)accessibilitySetValue: (id)value
-				 forAttribute: (NSString*) attribute {
-	[super accessibilitySetValue: value
-					forAttribute: attribute];
-}
-
-- (NSArray*) accessibilityAttributeNames {
-    // Attributes we support
-    static NSArray* attributes = nil;
-    
-    // Populate the attributes on the first call
-    if (!attributes) {
-        attributes = [[[super accessibilityAttributeNames] 
-                       arrayByAddingObjectsFromArray: [NSArray arrayWithObjects: 
-                                                       NSAccessibilityContentsAttribute, 
-                                                       NSAccessibilityChildrenAttribute,
-                                                       NSAccessibilityHelpAttribute,
-                                                       NSAccessibilityDescriptionAttribute,
-                                                       NSAccessibilityTitleAttribute,
-                                                       NSAccessibilityFocusedUIElementAttribute,
-                                                       nil]] retain];
-    }
-    
-    // Return as the result
-    return attributes;
-}
-
-- (id) accessibilityFocusedUIElement {
-	NSResponder* firstResponder = [[self window] firstResponder];
-	
-	if (firstResponder == nil) return self;
-	
-	if ([firstResponder isKindOfClass: [NSView class]]) {
-		NSView* windowView = (NSView*) firstResponder;
-		
-		while (windowView != nil) {
-			if ([windowView isKindOfClass: [GlkWindow class]]) {
-				return windowView;
-			}
-			
-			windowView = [windowView superview];
-		}
-	}
-	
-	return [super accessibilityFocusedUIElement];
-}
-
-- (id)accessibilityAttributeValue:(NSString *)attribute {
-	NSLog(@"%@ %@", [self class], attribute);
-
-	if ([attribute isEqualToString: NSAccessibilityChildrenAttribute]
-		|| [attribute isEqualToString: NSAccessibilityContentsAttribute]) {
-		return [NSArray arrayWithObjects: rootWindow, nil];
-	} else if ([attribute isEqualToString: NSAccessibilityFocusedUIElementAttribute]) {
-		return [self accessibilityFocusedUIElement];
-	} else if ([attribute isEqualToString: NSAccessibilityHelpAttribute]
-			   || [attribute isEqualToString: NSAccessibilityDescriptionAttribute]) {
-		NSString* description = @"an interactive fiction game";
-		if (delegate && [delegate respondsToSelector: @selector(taskDescription)]) {
-			description = [delegate taskDescription];
-		}
-		return [NSString stringWithFormat: @"%@ %@", running?@"Running":@"Finished", description];
-	} else if ([attribute isEqualToString: NSAccessibilityRoleDescriptionAttribute]) {
-		return @"GLK view";
-	} else if ([attribute isEqualToString: NSAccessibilityRoleAttribute]) {
-		return NSAccessibilityGroupRole;
-	}
-
-	return [super accessibilityAttributeValue: attribute];
-}
-
-- (BOOL)accessibilityIsIgnored {
-	return NO;
-}
 
 @end

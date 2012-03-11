@@ -212,14 +212,4 @@
 
 // = NSAccessibility =
 
-- (id)accessibilityAttributeValue:(NSString *)attribute {
-	NSLog(@"%@ %@", [self class], attribute);
-    
-	if ([attribute isEqualToString: NSAccessibilityRoleDescriptionAttribute]) {
-		return [NSString stringWithFormat: @"GLK graphics window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];;
-	} 
-	
-	return [super accessibilityAttributeValue: attribute];
-}
-
 @end

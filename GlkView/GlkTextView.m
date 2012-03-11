@@ -509,7 +509,6 @@
 	while (glkWindowView != nil && ![glkWindowView isKindOfClass: [GlkWindow class]]) {
 		glkWindowView = [glkWindowView superview];
 	}
-	NSAccessibilityPostNotification(glkWindowView, NSAccessibilityFocusedUIElementChangedNotification);	
 }
 
 - (BOOL)becomeFirstResponder {
@@ -541,76 +540,5 @@
 }
 
 // = NSAccessibility =
-
-#if 1
-
-- (NSString *)accessibilityActionDescription: (NSString*) action {
-	if ([action isEqualToString: @"Repeat last command"])
-		return @"Read the output of the last command entered";
-	
-	return [super accessibilityActionDescription: action];
-}
-
-- (NSArray *)accessibilityActionNames {
-	NSMutableArray* result = [[super accessibilityActionNames] mutableCopy];
-	
-	[result addObjectsFromArray:[NSArray arrayWithObjects: 
-		@"Read last command",
-		nil]];
-	
-	return [result autorelease];
-}
-
-- (void)accessibilityPerformAction:(NSString *)action {
-	[super accessibilityPerformAction: action];
-}
-
-- (BOOL)accessibilityIsAttributeSettable:(NSString *)attribute {
-	return [super accessibilityIsAttributeSettable: attribute];;
-}
-
-- (void)accessibilitySetValue: (id)value
-				 forAttribute: (NSString*) attribute {
-	[super accessibilitySetValue: value
-					forAttribute: attribute];
-}
-
-- (NSArray*) accessibilityAttributeNames {
-    // Attributes we support
-    static NSArray* attributes = nil;
-    
-    // Populate the attributes on the first call
-    if (!attributes) {
-        attributes = [[[super accessibilityAttributeNames] 
-                       arrayByAddingObjectsFromArray: [NSArray arrayWithObjects: 
-                                                       NSAccessibilityHelpAttribute, 
-                                                       NSAccessibilityParentAttribute,
-                                                       nil]] retain];
-    }
-    
-    // Return as the result
-    return attributes;
-}
-
-- (id)accessibilityAttributeValue:(NSString *)attribute {
-	NSLog(@"%@ %@", [self class], attribute);
-    
-	if ([attribute isEqualToString: NSAccessibilityHelpAttribute]) {
-		if (!receivingCharacters) return @"Text window";
-		return [NSString stringWithFormat: @"GLK text window%@%@", @"", receivingCharacters?@", waiting for a key press":@""];
-	} else if ([attribute isEqualToString: NSAccessibilityParentAttribute]) {
-		//return nil;
-	} else if ([attribute isEqualToString: NSAccessibilityRoleAttribute]) {
-		return NSAccessibilityTextAreaRole;
-	}
-	
-	return [super accessibilityAttributeValue: attribute];
-}
-
-- (BOOL)accessibilityIsIgnored {
-	return NO;
-}
-
-#endif
 
 @end

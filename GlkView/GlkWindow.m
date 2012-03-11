@@ -8,12 +8,6 @@
 
 #import "GlkWindow.h"
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_4
-
-#define NSAccessibilityTopLevelUIElementAttribute @""
-
-#endif
-
 @implementation GlkWindow
 
 // = Initialisation =
@@ -404,7 +398,6 @@
 }
 
 - (void) postFocusNotification {
-	NSAccessibilityPostNotification(self, NSAccessibilityFocusedUIElementChangedNotification);
 }
 
 - (BOOL)becomeFirstResponder {
@@ -650,82 +643,5 @@
 }
 
 // = Accessibility =
-
-- (NSString *)accessibilityActionDescription: (NSString*) action {
-	return [super accessibilityActionDescription:  action];
-}
-
-- (NSArray *)accessibilityActionNames {
-	return [super accessibilityActionNames];
-}
-
-- (BOOL)accessibilityIsAttributeSettable:(NSString *)attribute {
-	return [super accessibilityIsAttributeSettable: attribute];;
-}
-
-- (void)accessibilityPerformAction:(NSString *)action {
-	[super accessibilityPerformAction: action];
-}
-
-- (void)accessibilitySetValue: (id)value
-				 forAttribute: (NSString*) attribute {
-	// No settable attributes
-	[super accessibilitySetValue: value
-					forAttribute: attribute];
-}
-
-- (NSArray*) accessibilityAttributeNames {
-    // Attributes we support
-    static NSArray* attributes = nil;
-    
-    // Populate the attributes on the first call
-    if (!attributes) {
-        attributes = [[[super accessibilityAttributeNames] 
-                       arrayByAddingObjectsFromArray: [NSArray arrayWithObjects: 
-                                                       NSAccessibilityChildrenAttribute, 
-                                                       NSAccessibilityFocusedAttribute,
-                                                       nil]] retain];
-    }
-    
-    // Return as the result
-    return attributes;
-}
-
-- (id)accessibilityAttributeValue:(NSString *)attribute {
-	NSLog(@"%@ %@", [self class], attribute);
-    
-	if ([attribute isEqualToString: NSAccessibilityChildrenAttribute]) {
-		//return [NSArray array];
-	} else if ([attribute isEqualToString: NSAccessibilityRoleDescriptionAttribute]) {
-		return [NSString stringWithFormat: @"GLK window%@%@", lineInput?@", waiting for commands":@"", charInput?@", waiting for a key press":@""];;
-	} else if ([attribute isEqualToString: NSAccessibilityRoleAttribute]) {
-		return NSAccessibilityUnknownRole;
-	} else if ([attribute isEqualToString: NSAccessibilityFocusedAttribute]) {
-		NSView* viewResponder = (NSView*)[[self window] firstResponder];
-		if ([viewResponder isKindOfClass: [NSView class]]) {
-			while (viewResponder != nil) {
-				if (viewResponder == self) return [NSNumber numberWithBool: YES];
-				
-				viewResponder = [viewResponder superview];
-			}
-		}
-		
-		return [NSNumber numberWithBool: NO];
-	} else if ([attribute isEqualToString: NSAccessibilityParentAttribute]) {
-		//return nil;
-	} else if ([attribute isEqualToString: NSAccessibilityFocusedUIElementAttribute]) {
-		return [self accessibilityFocusedUIElement];
-	}
-	
-	return [super accessibilityAttributeValue: attribute];
-}
-
-- (BOOL)accessibilityIsIgnored {
-	return NO;
-}
-
-- (id)accessibilityFocusedUIElement {
-	return self;
-}
 
 @end
