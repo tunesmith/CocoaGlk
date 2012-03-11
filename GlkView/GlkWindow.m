@@ -681,9 +681,4 @@
     return [super accessibilityAttributeValue: attribute];
 }
 
-- (BOOL) accessibilityIsIgnored {
-    // Not ignored
-    return NO;
-}
-
 @end
