@@ -75,10 +75,10 @@ typedef struct GlkLineSection {
 	
 	// The glyph cache
 	NSRange cached;								// The range of the cached glyphs
-	int cacheLength;							// Size of the cache
+	NSUInteger cacheLength;						// Size of the cache
 	
 	NSGlyph* cacheGlyphs;						// The identifier for each glyph that we're laying out
-	unsigned* cacheCharIndexes;					// The character index into the source string for each glyph
+	NSUInteger* cacheCharIndexes;				// The character index into the source string for each glyph
 	NSGlyphInscription* cacheInscriptions;		// The inscriptions for each glyph
 	BOOL* cacheElastic;							// The elastic bits for each glyph
 	unsigned char* cacheBidi;					// The bidirectional level for each glyph
@@ -151,7 +151,7 @@ typedef struct GlkLineSection {
 - (float) currentRightMarginHeight;							// Amount required to clear the right margin
 
 // Laying out glyphs
-- (int) layoutLineFromGlyph: (int) glyph;					// Lays out a single line fragment from the specified glyph
+- (NSUInteger) layoutLineFromGlyph: (NSUInteger) glyph;		// Lays out a single line fragment from the specified glyph
 
 // Setting the delegate
 - (void) setDelegate: (NSObject<GlkCustomTextLayout>*) delegate;	// Sets the delegate (the delegate is NOT RETAINED)

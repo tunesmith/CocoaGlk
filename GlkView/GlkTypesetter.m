@@ -330,7 +330,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	if (cacheRange.length < GlyphLookahead) cacheRange.length = GlyphLookahead;
 	
 	// The cache range must lie within the number of glyphs in the layout manager
-	int numGlyphs = [layout numberOfGlyphs];
+	NSUInteger numGlyphs = [layout numberOfGlyphs];
 	if (cacheRange.length + cacheRange.location > numGlyphs) {
 		cacheRange.length = numGlyphs - cacheRange.location;
 	}
@@ -435,7 +435,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 #endif
 	
 	// Copy the results to the cache
-	int cacheIndex;
+	NSUInteger cacheIndex;
 	
 	if (cached.length == 0) {
 #ifdef Debug
@@ -454,7 +454,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 		cacheLength = cached.length + GlyphLookahead;
 
 		cacheGlyphs = realloc(cacheGlyphs, sizeof(NSGlyph)*cacheLength);
-		cacheCharIndexes = realloc(cacheCharIndexes, sizeof(unsigned)*cacheLength);
+		cacheCharIndexes = realloc(cacheCharIndexes, sizeof(NSUInteger)*cacheLength);
 		cacheInscriptions = realloc(cacheInscriptions, sizeof(NSGlyphInscription)*cacheLength);
 		cacheElastic = realloc(cacheElastic, sizeof(BOOL)*cacheLength);
 		cacheBidi = realloc(cacheBidi, sizeof(unsigned char)*cacheLength);
@@ -470,7 +470,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	
 	// Copy the various bits and pieces
 	memcpy(cacheGlyphs + cacheIndex, glyphs, cacheRange.length*sizeof(NSGlyph));
-	memcpy(cacheCharIndexes + cacheIndex, charIndexes, cacheRange.length*sizeof(unsigned));
+	memcpy(cacheCharIndexes + cacheIndex, charIndexes, cacheRange.length*sizeof(NSUInteger));
 	memcpy(cacheInscriptions + cacheIndex, inscriptions, cacheRange.length*sizeof(NSGlyphInscription));
 	memcpy(cacheElastic + cacheIndex, elastic, cacheRange.length*sizeof(BOOL));
 	memcpy(cacheBidi + cacheIndex, bidi, cacheRange.length*sizeof(unsigned char));
@@ -490,7 +490,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 - (void) removeGlyphsFromCache: (int) newMinGlyphIndex {
 	// Removes glyphs from the cache that are no longer going to be used
 	int x;
-	int glyphsToRemove = newMinGlyphIndex - cached.location;
+	NSUInteger glyphsToRemove = newMinGlyphIndex - cached.location;
 	
 #ifdef Debug
 	if (glyphsToRemove < 0) {
@@ -530,9 +530,9 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 	
 	// Move the caches around
-	int numRemaining = cached.length - glyphsToRemove;
+	NSUInteger numRemaining = cached.length - glyphsToRemove;
 	memmove(cacheGlyphs, cacheGlyphs + glyphsToRemove, sizeof(NSGlyph)*numRemaining);
-	memmove(cacheCharIndexes, cacheCharIndexes + glyphsToRemove, sizeof(unsigned)*numRemaining);
+	memmove(cacheCharIndexes, cacheCharIndexes + glyphsToRemove, sizeof(NSUInteger)*numRemaining);
 	memmove(cacheInscriptions, cacheInscriptions + glyphsToRemove, sizeof(NSGlyphInscription)*numRemaining);
 	memmove(cacheElastic, cacheElastic + glyphsToRemove, sizeof(BOOL)*numRemaining);
 	memmove(cacheBidi, cacheBidi + glyphsToRemove, sizeof(unsigned char)*numRemaining);
@@ -756,8 +756,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	NSRect used = bounds;
 	
 	// Work out the glyph range for this line fragment
-	int firstGlyph = sections[0].glyphRange.location;
-	int lastGlyph = sections[numLineSections-1].glyphRange.location + sections[numLineSections-1].glyphRange.length;
+	NSUInteger firstGlyph = sections[0].glyphRange.location;
+	NSUInteger lastGlyph = sections[numLineSections-1].glyphRange.location + sections[numLineSections-1].glyphRange.length;
 	NSRange glyphRange = NSMakeRange(firstGlyph, lastGlyph-firstGlyph);
 	
 	// Work out the baseline offset for this line fragment
@@ -1048,7 +1048,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	}
 }
 
-- (int) layoutLineFromGlyph: (int) glyph {
+- (NSUInteger) layoutLineFromGlyph: (NSUInteger) glyph {
 	// Lays out a single line fragment from the specified glyph
 	if (![self cacheGlyphsIncluding: glyph]) return glyph;
 	glyph -= cached.location;
