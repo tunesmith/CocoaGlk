@@ -1,7 +1,7 @@
 // $Id: git.c,v 1.21 2004/12/22 12:40:07 iain Exp $
 
 #include "git.h"
-#include <gi_blorb.h>
+#include <GlkClient/gi_blorb.h>
 #include <stdlib.h>
 #include <stdio.h>
 
