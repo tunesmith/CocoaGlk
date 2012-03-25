@@ -1,0 +1,3 @@
+[submodule "depends/glulxe"]
+	path = depends/glulxe
+	url = https://github.com/erkyrath/glulxe.git
