@@ -46,10 +46,10 @@ int main(int argv, const char** argc) {
 	// Get the interpreter version
 	glui32 version = do_gestalt(gestulx_TerpVersion, 0);
 	char vString[64];
-	sprintf(vString, "Glulxe interpreter version %lu.%lu.%lu", (version>>16)&0xff, (version>>8)&0xff, version&0xff);
+	sprintf(vString, "Glulxe interpreter version %u.%u.%u", (version>>16)&0xff, (version>>8)&0xff, version&0xff);
 	cocoaglk_log_ex(vString, 1);
 	version = do_gestalt(gestulx_GlulxVersion, 0);
-	sprintf(vString, "Glulxe VM version %lu.%lu.%lu", (version>>16)&0xff, (version>>8)&0xff, version&0xff);
+	sprintf(vString, "Glulxe VM version %u.%u.%u", (version>>16)&0xff, (version>>8)&0xff, version&0xff);
 	cocoaglk_log_ex(vString, 1);
 	
 	// See if we're using a blorb or a ulx file

@@ -63,10 +63,10 @@ int main(int argv, const char** argc) {
 	// Get the interpreter version
 	glui32 version = gestalt(GESTALT_TERP_VERSION, 0);
 	char vString[64];
-	sprintf(vString, "Git interpreter version %lu.%lu.%lu", (version>>16)&0xff, (version>>8)&0xff, version&0xff);
+	sprintf(vString, "Git interpreter version %u.%u.%u", (version>>16)&0xff, (version>>8)&0xff, version&0xff);
 	cocoaglk_log_ex(vString, 1);
 	version = gestalt(GESTALT_SPEC_VERSION, 0);
-	sprintf(vString, "Glulxe VM version %lu.%lu.%lu", (version>>16)&0xff, (version>>8)&0xff, version&0xff);
+	sprintf(vString, "Glulxe VM version %u.%u.%u", (version>>16)&0xff, (version>>8)&0xff, version&0xff);
 	cocoaglk_log_ex(vString, 1);
 	
 	// See if we're using a blorb or a ulx file
