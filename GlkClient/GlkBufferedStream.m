@@ -101,8 +101,8 @@
 	bufferRemaining = readAhead;
 }
 
-- (void) setPosition: (int) position
-		  relativeTo: (enum GlkSeekMode) seekMode {
+- (void) setPosition: (in int) position
+		  relativeTo: (in enum GlkSeekMode) seekMode {
 	// Work out the target position
 	if (seekMode == GlkSeekCurrent) {
 		position -= (readAhead-bufferRemaining);
@@ -127,15 +127,15 @@
 
 // Writing
 
-- (void) putChar: (unichar) ch {
+- (void) putChar: (in unichar) ch {
 	// Writing not supported
 }
 
-- (void) putString: (NSString*) string {
+- (void) putString: (in bycopy NSString*) string {
 	// Writing not supported
 }
 
-- (void) putBuffer: (NSData*) buffer {
+- (void) putBuffer: (in bycopy NSData*) buffer {
 	// Writing not supported
 }
 
@@ -151,7 +151,7 @@
 	return bytes[0];
 }
 
-- (NSString*) getLineWithLength: (int) maxLen {
+- (bycopy NSString*) getLineWithLength: (int) maxLen {
 	NSMutableString* res = [NSMutableString string];
 	
 	unichar ch;
@@ -173,7 +173,7 @@
 	return res;
  }
 
-- (NSData*) getBufferWithLength: (unsigned) length {
+- (bycopy NSData*) getBufferWithLength: (unsigned) length {
 	// Return nothing if there's nothing in the buffer and we can't fill it up
 	if (bufferRemaining == readAhead && ![self fillBuffer]) {
 		return nil;

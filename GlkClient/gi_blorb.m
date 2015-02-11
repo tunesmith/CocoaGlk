@@ -227,7 +227,6 @@ static giblorb_err_t giblorb_initialize_map(giblorb_map_t *map)
     giblorb_err_t err;
     char *ptr;
     glui32 len;
-    glui32 val;
     glui32 numres;
     int gotindex = FALSE; 
 
@@ -379,7 +378,7 @@ giblorb_err_t giblorb_load_chunk_by_number(giblorb_map_t *map,
 {
     giblorb_chunkdesc_t *chu;
     
-    if (chunknum < 0 || chunknum >= map->numchunks)
+    if (chunknum >= map->numchunks)
         return giblorb_err_NotFound;
 
     chu = &(map->chunks[chunknum]);
@@ -396,7 +395,6 @@ giblorb_err_t giblorb_load_chunk_by_number(giblorb_map_t *map,
             
         case giblorb_method_Memory:
             if (!chu->ptr) {
-                giblorb_err_t err;
                 glui32 readlen;
                 void *dat = giblorb_malloc(chu->len);
                 
@@ -445,7 +443,7 @@ giblorb_err_t giblorb_unload_chunk(giblorb_map_t *map, glui32 chunknum)
 {
     giblorb_chunkdesc_t *chu;
     
-    if (chunknum < 0 || chunknum >= map->numchunks)
+    if (chunknum >= map->numchunks)
         return giblorb_err_NotFound;
 
     chu = &(map->chunks[chunknum]);
@@ -515,7 +513,7 @@ static int sortsplot(giblorb_resdesc_t *v1, giblorb_resdesc_t *v2)
 
 static void giblorb_qsort(giblorb_resdesc_t **list, int len)
 {
-    int ix, jx, res, val;
+    int ix, jx, res;
     giblorb_resdesc_t *tmpptr, *pivot;
     
     if (len < 6) {

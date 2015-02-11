@@ -25,7 +25,7 @@ NSDate* cocoaglk_nextTimerEvent = nil;
 
 @implementation GlkListener
 
-- (void) eventReady: (int) syncCount {
+- (oneway void) eventReady: (int) syncCount {
 	cocoaglk_eventwaiting = YES;
 	cocoaglk_loopIteration = syncCount;
 }
@@ -41,7 +41,7 @@ void cocoaglk_next_time() {
 	
 	do {
 		// Move cocoaglk_nextTimerEvent on
-		NSDate* nextTime = [cocoaglk_nextTimerEvent addTimeInterval: interval];
+		NSDate* nextTime = [cocoaglk_nextTimerEvent dateByAddingTimeInterval: interval];
 		
 		[cocoaglk_nextTimerEvent release];
 		cocoaglk_nextTimerEvent = [nextTime retain];

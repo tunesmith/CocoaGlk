@@ -425,7 +425,7 @@ NSString* GlkStyleAttributeName = @"GlkStyleAttribute";
 // = NSCopying =
 
 - (id) copyWithZone: (NSZone*) zone {
-	GlkStyle* copy = [[GlkStyle allocWithZone: zone] init];
+	GlkStyle* copy = [[GlkStyle alloc] init];
 	
 	copy->indentation = indentation;
 	copy->paraIndent = paraIndent;

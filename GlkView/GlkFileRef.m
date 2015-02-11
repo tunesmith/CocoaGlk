@@ -37,10 +37,11 @@
 		NSLog(@"Removing temporary file: %@", pathname);
 
 		// Delete any temporary files when deallocated
-		[[NSFileManager defaultManager] removeFileAtPath: pathname 
-												 handler: nil];
+        NSError* error;
+		[[NSFileManager defaultManager] removeItemAtURL: [NSURL fileURLWithPath: pathname]
+												 error: &error];
 	}
-	
+
 	[pathname release]; pathname = nil;
 	
 	[super dealloc];
@@ -51,8 +52,9 @@
 		NSLog(@"Removing temporary file: %@", pathname);
 		
 		// Also delete any temporary files when the application terminates
-		[[NSFileManager defaultManager] removeFileAtPath: pathname 
-												 handler: nil];
+        NSError* error;
+		[[NSFileManager defaultManager] removeItemAtURL: [NSURL fileURLWithPath: pathname]
+												 error: &error];
 	}
 }
 
@@ -64,27 +66,28 @@
 
 // = The fileref protocol =
 
-- (NSObject<GlkStream>*) createReadOnlyStream {
+- (byref NSObject<GlkStream>*) createReadOnlyStream {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadingWithFilename: pathname];
 	
 	return [stream autorelease];
 }
 
-- (NSObject<GlkStream>*) createWriteOnlyStream; {
+- (byref NSObject<GlkStream>*) createWriteOnlyStream; {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForWritingWithFilename: pathname];
 	
 	return [stream autorelease];
 }
 
-- (NSObject<GlkStream>*) createReadWriteStream {
+- (byref NSObject<GlkStream>*) createReadWriteStream {
 	GlkFileStream* stream = [[GlkFileStream alloc] initForReadWriteWithFilename: pathname];
 	
 	return [stream autorelease];
 }
 
 - (void) deleteFile {
-	[[NSFileManager defaultManager] removeFileAtPath: pathname 
-											 handler: nil];
+    NSError* error;
+	[[NSFileManager defaultManager] removeItemAtURL: [NSURL fileURLWithPath: pathname]
+											 error: &error];
 }
 
 - (BOOL) fileExists {

@@ -56,7 +56,7 @@ NSMutableDictionary* cocoaglk_fileref_bindings = nil;
 - (NSObject<GlkFileRef>*) fileRef { return ref; }
 - (BOOL) cancelled { return cancelled; }
 
-- (void) promptedFileRef: (NSObject<GlkFileRef>*) fref {
+- (void) promptedFileRef: (in byref NSObject<GlkFileRef>*) fref {
 	ref = [fref retain];
 }
 

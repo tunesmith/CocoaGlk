@@ -385,7 +385,8 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 			currentFont = [layout substituteFontForFont: [currentAttributes objectForKey: NSFontAttributeName]];
 			currentAscender = [currentFont ascender];
 			currentDescender = [currentFont descender];
-			currentHeight = [currentFont defaultLineHeightForFont];
+            NSLayoutManager* lm = [[[NSLayoutManager alloc] init] autorelease];
+			currentHeight = [lm defaultLineHeightForFont: currentFont];
 		}
 		
 		// Set the current attributes
@@ -680,7 +681,7 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 	int x;
 	
 	// Work out the baseline offset and unaligned bounds for this line fragment
-	float baselineOffset = -fragmentBounds.origin.y;
+	float baselineOffset;
 	customOffset = 0;
 	
 	// Use only the items aligned to the baseline to work out the 'real' baseline.
@@ -1493,26 +1494,26 @@ static NSString* buggyAttribute = @"BUG IF WE TRY TO ACCESS THIS";
 
 - (NSRange) paragraphGlyphRange {
 	if ([super respondsToSelector: @selector(paragraphGlyphRange)]) {
-		return [(id)super paragraphGlyphRange];
+		return [super paragraphGlyphRange];
 	} else {
 		return NSMakeRange(0,0);
 	}
 }
 
 - (void) beginParagraph {
-	[(id)super beginParagraph];
+	[super beginParagraph];
 }
 
 - (void) endParagraph {
-	[(id)super endParagraph];
+	[super endParagraph];
 }
 
 - (void)beginLineWithGlyphAtIndex:(unsigned)glyphIndex {
-	[(id)super beginLineWithGlyphAtIndex: glyphIndex];
+	[super beginLineWithGlyphAtIndex: glyphIndex];
 }
 
 - (void)endLineWithGlyphRange:(NSRange)lineGlyphRange {
-	[(id)super endLineWithGlyphRange: lineGlyphRange];
+	[super endLineWithGlyphRange: lineGlyphRange];
 }
 
 - (unsigned int)layoutParagraphAtPoint:(NSPoint *)lineFragmentOrigi {

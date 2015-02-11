@@ -44,6 +44,7 @@
 	[newContainer setContainerSize: NSMakeSize(1e8, 1e8)];
 	[newContainer setWidthTracksTextView: YES];
 	[newContainer setHeightTracksTextView: NO];
+    [newContainer setLineFragmentPadding:0.0f];
 				
 	// Create the text view and the scroller
 	textView = [[GlkTextView alloc] initWithFrame: [self frame]];
@@ -52,6 +53,7 @@
 	[typesetter setDelegate: textView];
 	[textView setTextContainer: newContainer];
 	[newContainer setTextView: textView];
+    [newContainer autorelease];
 				
 	[textView setMinSize:NSMakeSize(0.0, 0.0)];
 	[textView setMaxSize:NSMakeSize(1e8, 1e8)];
@@ -238,7 +240,7 @@
 
 // = Streams =
 
-- (void) putString: (NSString*) string {
+- (void) putString: (in bycopy NSString*) string {
 	int pos = 0;
 	
 	[containingView performLayoutIfNecessary];

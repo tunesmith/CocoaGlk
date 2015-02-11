@@ -55,6 +55,7 @@
 	[typesetter setDelegate: textView];
 	[textView setTextContainer: newContainer];
 	[newContainer setTextView: textView];
+    [newContainer autorelease];
 				
 	// [[textView textContainer] setWidthTracksTextView: YES];
 	//[[textView textContainer] setContainerSize: NSMakeSize(1e8, 1e8)];
@@ -65,6 +66,8 @@
 	[textView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
 	[textView setEditable: NO];
 	[textView setUsesFindPanel: YES]; // FIXME: Won't work on Jaguar
+    [textView setMenu: nil];
+    [textView setEnabledTextCheckingTypes:0];
 	
 	inputPos = 0;
 	[[textView textStorage] setDelegate: self];
@@ -645,7 +648,7 @@
 
 // = Streaming =
 
-- (void) putString: (NSString*) string {
+- (void) putString: (in bycopy NSString*) string {
 	NSAttributedString* atStr = [[NSAttributedString alloc] initWithString: string
 																attributes: [self currentTextAttributes]];
 	

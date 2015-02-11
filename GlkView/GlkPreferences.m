@@ -279,7 +279,7 @@ NSString* GlkPreferencesHaveChangedNotification = @"GlkPreferencesHaveChangedNot
 // = NSCopying =
 
 - (id) copyWithZone: (NSZone*) zone {
-	GlkPreferences* copy = [[GlkPreferences allocWithZone: zone] init];
+	GlkPreferences* copy = [[GlkPreferences alloc] init];
 	
 	[copy setProportionalFont: proportionalFont];
 	[copy setFixedFont: fixedFont];

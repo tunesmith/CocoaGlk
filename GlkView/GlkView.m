@@ -60,7 +60,9 @@
 		inputReceivers = [[NSMutableArray alloc] init];
 		
 		extensionsForUsage = [[NSMutableDictionary alloc] init];
-		
+
+        listener = nil;
+
 		scaleFactor = 1.0f;
 		borderWidth = 2.0f;
     }
@@ -86,7 +88,9 @@
 	
 	[arrangeEvent release]; arrangeEvent = nil;
 	[events release]; events = nil;
-	[listener release]; listener = nil;
+	[listener release]; 
+	//NSLog(@"self = %@ listener %@ released (dealloc)", self, listener); 
+	listener = nil;
 	
 	[fadeTimer invalidate];
 	[fadeTimer release]; fadeTimer = nil;
@@ -368,7 +372,7 @@
 	}
 }
 
-- (void) showError: (NSString*) error {
+- (void) showError: (in bycopy NSString*) error {
 	[self logMessage: [NSString stringWithFormat: @"Client error: %@", error]
 		  withStatus: GlkLogError];
 	
@@ -382,15 +386,15 @@
 																 value: @"Cancel"
 																 table: nil],
 						  nil, nil, [self window], self, nil, nil, nil,
-						  [[NSBundle mainBundle] localizedStringForKey: error
-																 value: error
-																 table: nil]);
+						  @"%@", [[NSBundle mainBundle] localizedStringForKey: error
+                                                                        value: error
+                                                                        table: nil]);
 	} else {
 		NSLog(@"Glk error: %@", error);
 	}
 }
 
-- (void) showWarning: (NSString*) warning {
+- (void) showWarning: (in bycopy NSString*) warning {
 	[self logMessage: [NSString stringWithFormat: @"Client warning: %@", warning]
 		  withStatus: GlkLogWarning];
 
@@ -508,9 +512,11 @@
 		// We retain the listener here as there is a non-zero chance of the client waiting on a
 		// call to setEventListener: here, which will cause a segfault if it releases the current
 		// listener (seems to be a bug in NSDistantObject)
-		[listener retain];
-		[listener eventReady: syncCount];
+		[listener retain];  
+		//NSLog(@"self=%@ Listener %x retained", self, (int)(void*)listener);
+        [listener eventReady: syncCount];
 		[listener release];
+		//NSLog(@"self=%@ Listener %@ released", self, listener);
 	}
 }
 
@@ -635,7 +641,7 @@
 
 - (void) terminateClient {
 	if (!subtask) {
-		NSLog(@"Oops: terminateClient can't sensibly be called if the client isn't being controlled by the GlkView");
+		//NSLog(@"Oops: terminateClient can't sensibly be called if the client isn't being controlled by the GlkView");
 		return;
 	}
 
@@ -664,7 +670,7 @@
 		extraStreamDictionary = [[NSMutableDictionary alloc] init];
 	}
 	
-	[extraStreamDictionary setObject: [[GlkFileStream alloc] initForReadingWithFilename: filename]
+	[extraStreamDictionary setObject: [[[GlkFileStream alloc] initForReadingWithFilename: filename] autorelease]
 							  forKey: streamKey];
 	
 	[self logMessage: [NSString stringWithFormat: @"Creating stream to read data from '%@' with key '%@'", filename, streamKey]
@@ -712,6 +718,7 @@
 }
 
 - (void) clientHasFinished {
+    listener = nil;
 	running = NO;
 	
 	[self logMessage: @"Glk client has terminated"
@@ -722,7 +729,7 @@
 
 // Buffering
 
-- (void) performOperationsFromBuffer: (GlkBuffer*) buffer {
+- (void) performOperationsFromBuffer: (in bycopy GlkBuffer*) buffer {
 	if (flushing) {
 		NSLog(@"WARNING: buffer flush deferred to avoid out-of-order data");
 		
@@ -805,7 +812,7 @@
 
 // Streams
 
-- (NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId {
+- (byref NSObject<GlkStream>*) streamForWindowIdentifier: (unsigned) windowId {
 	GlkWindow* window = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowId]];
 	
 	if (window) {
@@ -815,11 +822,11 @@
 	}
 }
 
-- (NSObject<GlkStream>*) inputStream {
+- (byref NSObject<GlkStream>*) inputStream {
 	return inputStream;
 }
 
-- (NSObject<GlkStream>*) streamForKey: (NSString*) key {
+- (byref NSObject<GlkStream>*) streamForKey: (in bycopy NSString*) key {
 	return [extraStreamDictionary objectForKey: key];
 }
 
@@ -924,7 +931,7 @@
 
 // Events
 
-- (NSObject<GlkEvent>*) nextEvent {
+- (bycopy NSObject<GlkEvent>*) nextEvent {
 	if ([events count] > 0) {
 		// Get the next event from the queue
 		GlkEvent* nextEvent = [[[events objectAtIndex: 0] retain] autorelease];
@@ -943,12 +950,14 @@
 	}
 }
 
-- (void) setEventListener: (NSObject<GlkEventListener>*) newListener {
+- (void) setEventListener: (in byref NSObject<GlkEventListener>*) newListener {
+    //NSLog(@"self=%@ Listener %@ autoreleased", self, listener);
 	[listener autorelease]; listener = nil;
 	
 	// Inform any input automation objects that if they've got events waiting, then now is the time to fire them
 	if (newListener != nil) {
 		listener = [newListener retain];
+        //NSLog(@"self=%@ Listener %@ retained (new)", self, listener);
 
 		NSEnumerator* inputReceiverEnum = [inputReceivers objectEnumerator];
 		NSObject<GlkAutomation>* receiver;
@@ -989,7 +998,7 @@
 
 // Filerefs
 
-- (NSObject<GlkFileRef>*) fileRefWithName: (NSString*) name {
+- (NSObject<GlkFileRef>*) fileRefWithName: (in bycopy NSString*) name {
 	// Turn into a 'real' path
 	NSString* path = [self pathForNamedFile: name];
 	if (!path) return nil;
@@ -1015,9 +1024,9 @@
 		tempName[x] = 'X';
 	tempName[x] = 0;
 	
-	mktemp(tempName);
+	mkstemp(tempName);
 	
-	NSString* tempPath = [tempDir stringByAppendingPathComponent: [NSString stringWithCString: tempName]];
+	NSString* tempPath = [tempDir stringByAppendingPathComponent: [NSString stringWithCString: tempName encoding: NSUTF8StringEncoding]];
 	
 	// Turn into a temporary fileref
 	GlkFileRef* res = [[GlkFileRef alloc] initWithPath: tempPath];
@@ -1025,31 +1034,7 @@
 	return [res autorelease];
 }
 
-- (void) panelDidEnd: (NSSavePanel*) panel
-		  returnCode: (int) returnCode
-		 contextInfo: (void*) willBeNil {
-	if (!promptHandler) return;
-	
-	if (returnCode == NSOKButton) {
-		GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [panel filename]];
-		[promptHandler promptedFileRef: promptRef];
-		[promptRef autorelease];
-		
-		[[NSUserDefaults standardUserDefaults] setObject: [panel directory]
-												  forKey: @"GlkSaveDirectory"];
-		if (delegate && [delegate respondsToSelector: @selector(savePreferredDirectory:)]) {
-			[delegate savePreferredDirectory: [panel directory]];
-		}
-	} else {
-		[promptHandler promptCancelled];
-	}
-	
-	[promptHandler release]; promptHandler = nil;
-	[allowedFiletypes release]; allowedFiletypes = nil;
-	[lastPanel release]; lastPanel = nil;
-}
-
-- (NSArray*) fileTypesForUsage: (NSString*) usage {
+- (bycopy NSArray*) fileTypesForUsage: (in bycopy NSString*) usage {
 	// Get the user-set value (if any)
 	NSArray* result = [[[extensionsForUsage objectForKey: usage] retain] autorelease];
 	if (result) return result;
@@ -1072,24 +1057,24 @@
 	return nil;
 }
 
-- (void) setFileTypes: (NSArray*) extensions
-			 forUsage: (NSString*) usage {
+- (void) setFileTypes: (in bycopy NSArray*) extensions
+			 forUsage: (in bycopy NSString*) usage {
 	[extensionsForUsage setObject: [[[NSArray alloc] initWithArray: extensions copyItems: YES] autorelease]
 						   forKey: usage];
 }
 
-- (void) promptForFilesForUsage: (NSString*) usage
+- (void) promptForFilesForUsage: (in bycopy NSString*) usage
 					 forWriting: (BOOL) writing
-						handler: (NSObject<GlkFilePrompt>*) handler {
+						handler: (in byref NSObject<GlkFilePrompt>*) handler {
 	// Pick a preferred directory
-	NSString* preferredDirectory = nil;
+	NSURL* preferredDirectoryURL = nil;
 	
 	if (delegate && [delegate respondsToSelector: @selector(preferredSaveDirectory)]) {
-		preferredDirectory = [delegate preferredSaveDirectory];
+		preferredDirectoryURL = [NSURL fileURLWithPath: [delegate preferredSaveDirectory]];
 	}
 	
-	if (preferredDirectory == nil) {
-		preferredDirectory = [[NSUserDefaults standardUserDefaults] objectForKey: @"GlkSaveDirectory"];
+	if (preferredDirectoryURL == nil) {
+		preferredDirectoryURL = [NSURL URLWithString: [[NSUserDefaults standardUserDefaults] objectForKey: @"GlkSaveDirectoryURL"]];
 	}
 	
 	// Defer to the delegate if it has the appropriate method implemented
@@ -1097,7 +1082,7 @@
 		if ([delegate promptForFilesForUsage: usage
 								  forWriting: writing
 									 handler: handler
-						  preferredDirectory: preferredDirectory]) {
+						  preferredDirectory: [preferredDirectoryURL path]]) {
 			// The delegate is handling this event
 			return;
 		}
@@ -1109,9 +1094,9 @@
 					   handler: handler];
 }
 
-- (void) promptForFilesOfType: (NSArray*) filetypes
+- (void) promptForFilesOfType: (in bycopy NSArray*) filetypes
 				   forWriting: (BOOL) writing
-					  handler: (NSObject<GlkFilePrompt>*) handler {
+					  handler: (in byref NSObject<GlkFilePrompt>*) handler {
 	// If we don't have a window, we can't show a dialog, so we can't get a filename
 	if (![self window]) {
 		[handler promptCancelled];
@@ -1125,14 +1110,14 @@
 	}
 	
 	// Pick a preferred directory
-	NSString* preferredDirectory = nil;
+	NSURL* preferredDirectoryURL = nil;
 	
 	if (delegate && [delegate respondsToSelector: @selector(preferredSaveDirectory)]) {
-		preferredDirectory = [delegate preferredSaveDirectory];
+		preferredDirectoryURL = [NSURL fileURLWithPath:[delegate preferredSaveDirectory]];
 	}
 	
-	if (preferredDirectory == nil) {
-		preferredDirectory = [[NSUserDefaults standardUserDefaults] objectForKey: @"GlkSaveDirectory"];
+	if (preferredDirectoryURL == nil) {
+		preferredDirectoryURL = [NSURL URLWithString: [[NSUserDefaults standardUserDefaults] objectForKey: @"GlkSaveDirectoryURL"]];
 	}
 	
 	// Cache the handler
@@ -1154,45 +1139,103 @@
 		// Create a save dialog
 		NSSavePanel* panel = [NSSavePanel savePanel];
 		
-		[panel setRequiredFileType: [allowedFiletypes objectAtIndex: 0]];
-		if (preferredDirectory != nil) [panel setDirectory: preferredDirectory];
+		if (preferredDirectoryURL != nil) {
+            [panel setDirectoryURL: preferredDirectoryURL];
+        }
 		
-		if ([panel respondsToSelector: @selector(setAllowedFileTypes:)]) {
-			// Only works on 10.3
-			[panel setAllowedFileTypes: allowedFiletypes];
-		}
+        [panel setAllowedFileTypes: allowedFiletypes];
 		
-		[panel beginSheetForDirectory: preferredDirectory
-								 file: nil
-					   modalForWindow: showAsSheet?window:nil
-						modalDelegate: self
-					   didEndSelector: @selector(panelDidEnd:returnCode:contextInfo:)
-						  contextInfo: nil];
+        [panel beginSheetModalForWindow: showAsSheet ? window : nil
+                      completionHandler:^(NSInteger returnCode)
+         {
+             if (promptHandler) {
+                 if (returnCode == NSOKButton) {
+                     GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [[panel URL] path]];
+                     [promptHandler promptedFileRef: promptRef];
+                     [promptRef autorelease];
+                     
+                     [[NSUserDefaults standardUserDefaults] setObject: [[panel directoryURL] absoluteString]
+                                                               forKey: @"GlkSaveDirectoryURL"];
+                     if( [[panel directoryURL] path] != nil ) {
+                         if (delegate && [delegate respondsToSelector: @selector(savePreferredDirectory:)]) {
+                             [delegate savePreferredDirectory: [[panel directoryURL] path]];
+                         }
+                     }
+                 } else {
+                     [promptHandler promptCancelled];
+                 }
+                 
+                 [promptHandler release]; promptHandler = nil;
+                 [allowedFiletypes release]; allowedFiletypes = nil;
+                 [lastPanel release]; lastPanel = nil;
+             }
+         }];
 		
 		[lastPanel release]; lastPanel = [panel retain];
 	} else {
 		// Create an open dialog
 		NSOpenPanel* panel = [NSOpenPanel openPanel];
 
-		[panel setRequiredFileType: [allowedFiletypes objectAtIndex: 0]];
-		if (preferredDirectory != nil) [panel setDirectory: preferredDirectory];
-		
-		if ([panel respondsToSelector: @selector(setAllowedFileTypes:)]) {
-			// Only works on 10.3
-			[panel setAllowedFileTypes: allowedFiletypes];
-		}
-		
-		[panel beginSheetForDirectory: preferredDirectory
-								 file: nil
-								types: allowedFiletypes
-					   modalForWindow: showAsSheet?window:nil
-						modalDelegate: self
-					   didEndSelector: @selector(panelDidEnd:returnCode:contextInfo:) 
-						  contextInfo: nil];
+		if (preferredDirectoryURL != nil) {
+            [panel setDirectoryURL: preferredDirectoryURL];
+        }
+
+        [panel setAllowedFileTypes: allowedFiletypes];
+
+        [panel beginSheetModalForWindow: showAsSheet ? window : nil
+                      completionHandler:^(NSInteger returnCode)
+         {
+             if (promptHandler) {
+                 if (returnCode == NSOKButton) {
+                     GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [[panel URL] path]];
+                     [promptHandler promptedFileRef: promptRef];
+                     [promptRef autorelease];
+                     
+                     [[NSUserDefaults standardUserDefaults] setObject: [[panel directoryURL] absoluteString]
+                                                               forKey: @"GlkSaveDirectoryURL"];
+                     if( [[panel directoryURL] path] != nil ) {
+                         if (delegate && [delegate respondsToSelector: @selector(savePreferredDirectory:)]) {
+                             [delegate savePreferredDirectory: [[panel directoryURL] path]];
+                         }
+                     }
+                 } else {
+                     [promptHandler promptCancelled];
+                 }
+                 
+                 [promptHandler release]; promptHandler = nil;
+                 [allowedFiletypes release]; allowedFiletypes = nil;
+                 [lastPanel release]; lastPanel = nil;
+             }
+         }];
 		
 		[lastPanel release]; lastPanel = [panel retain];
 	}
 }
+
+- (void) panelDidEnd: (NSSavePanel*) panel
+		  returnCode: (int) returnCode
+		 contextInfo: (void*) willBeNil {
+	if (!promptHandler) return;
+	
+	if (returnCode == NSOKButton) {
+		GlkFileRef* promptRef = [[GlkFileRef alloc] initWithPath: [[panel URL] path]];
+		[promptHandler promptedFileRef: promptRef];
+		[promptRef autorelease];
+		
+		[[NSUserDefaults standardUserDefaults] setObject: [[panel directoryURL] absoluteString]
+												  forKey: @"GlkSaveDirectoryURL"];
+		if (delegate && [delegate respondsToSelector: @selector(savePreferredDirectory:)]) {
+			[delegate savePreferredDirectory: [[panel directoryURL] path]];
+		}
+	} else {
+		[promptHandler promptCancelled];
+	}
+	
+	[promptHandler release]; promptHandler = nil;
+	[allowedFiletypes release]; allowedFiletypes = nil;
+	[lastPanel release]; lastPanel = nil;
+}
+
 
 // = Dealing with buffer operations =
 
@@ -1441,7 +1484,7 @@
 }
 
 - (void) clearWindowIdentifier: (glui32) identifier 
-		  withBackgroundColour: (NSColor*) bgCol {
+		  withBackgroundColour: (in bycopy NSColor*) bgCol {
 	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
 	
 	if (!win) {
@@ -1456,7 +1499,7 @@
 	[win clearWindow];
 }
 
-- (void) setInputLine: (NSString*) inputLine
+- (void) setInputLine: (in bycopy NSString*) inputLine
   forWindowIdentifier: (unsigned) identifier {
 	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: identifier]];
 	
@@ -1709,7 +1752,7 @@
 
 // Registering streams
 
-- (void) registerStream: (NSObject<GlkStream>*) stream
+- (void) registerStream: (in byref NSObject<GlkStream>*) stream
 		  forIdentifier: (unsigned) streamIdentifier {
 	[glkStreams setObject: stream
 				   forKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
@@ -1790,7 +1833,7 @@
 	[stream putChar: ch];
 }
 
-- (void) putString: (NSString*) string
+- (void) putString: (in bycopy NSString*) string
 		  toStream: (unsigned) streamIdentifier {
 	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
@@ -1807,7 +1850,7 @@
 	[stream putString: [NSString stringWithString: string]];
 }
 
-- (void) putData: (NSData*) data
+- (void) putData: (in bycopy NSData*) data
 		toStream: (unsigned) streamIdentifier {
 	NSObject<GlkStream>* stream = [glkStreams objectForKey: [NSNumber numberWithUnsignedInt: streamIdentifier]];
 	
@@ -1963,7 +2006,7 @@
 	[win requestHyperlinkInput];
 }
 
-- (NSString*) cancelLineEventsForWindowIdentifier: (unsigned) windowIdentifier {
+- (bycopy NSString*) cancelLineEventsForWindowIdentifier: (unsigned) windowIdentifier {
 	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
 	
 	if (!win) {
@@ -2009,11 +2052,11 @@
 
 // = Image management =
 
-- (void) setImageSource: (id<GlkImageSource>) source {
+- (void) setImageSource: (in byref id<GlkImageSource>) source {
 	imgSrc = [(NSObject<GlkImageSource>*)source retain];
 }
 
-- (id<GlkImageSource>) imageSource {
+- (out byref id<GlkImageSource>) imageSource {
 	return [[imgSrc retain] autorelease];
 }
 
@@ -2127,7 +2170,7 @@
 }
 
 - (void) fillAreaInWindowWithIdentifier: (unsigned) windowIdentifier
-							 withColour: (NSColor*) col
+							 withColour: (in bycopy NSColor*) col
 							  rectangle: (NSRect) rect {
 	GlkWindow* win = [glkWindows objectForKey: [NSNumber numberWithUnsignedInt: windowIdentifier]];
 	
@@ -2379,7 +2422,7 @@
 
 // = Writing log messages =
 
-- (void) logMessage: (NSString*) message {
+- (void) logMessage: (in bycopy NSString*) message {
 	[self logMessage: message
 		  withStatus: GlkLogCustom];
 }

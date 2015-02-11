@@ -65,7 +65,7 @@
 		connection = nil;
 	}
 	
-	NSString* connectionName = [NSString stringWithFormat: @"CocoaGlk-%@", hubName];
+	NSString* connectionName = [NSString stringWithFormat: @"97V36B3QYK.com.inform7.inform-compiler.CocoaGlk-%@", hubName];
 	NSPort* port = [NSMachPort port];
 	
 	connection = [[NSConnection connectionWithReceivePort: port
@@ -160,18 +160,18 @@
 
 // = Setting up the session =
 
-- (NSObject<GlkSession>*) createNewSession {
+- (byref NSObject<GlkSession>*) createNewSession {
 	return [self createNewSessionWithHubCookie: nil
 								 sessionCookie: nil];
 }
 
-- (NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie {
+- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie {
 	return [self createNewSessionWithHubCookie: hubCookie
 								 sessionCookie: nil];
 }
 
-- (NSObject<GlkSession>*) createNewSessionWithHubCookie: (NSString*) hubCookie
-										  sessionCookie: (NSString*) sessionCookie {
+- (byref NSObject<GlkSession>*) createNewSessionWithHubCookie: (in bycopy NSString*) hubCookie
+                                                sessionCookie: (in bycopy NSString*) sessionCookie {
 	if (sessionCookie == nil) {
 		return [self createAnonymousSession];
 	} else {

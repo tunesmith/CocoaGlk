@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -277,6 +277,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4B51AA5507E877C900576AB9;
 			remoteInfo = GlkClient;
+		};
+		FFF22E6118FD7366002BB61E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B3C3B780F3DAB850066A760;
+			remoteInfo = git;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1180,6 +1187,7 @@
 				4B51AA4A07E8771200576AB9 /* PBXTargetDependency */,
 				4B51AAB607E87B5E00576AB9 /* PBXTargetDependency */,
 				4B8BDE5607EB3E83008AE26D /* PBXTargetDependency */,
+				FFF22E6218FD7366002BB61E /* PBXTargetDependency */,
 				4BFA1CA607F8A2FE0068E16A /* PBXTargetDependency */,
 				4BBC414208A7AB1F00B790B5 /* PBXTargetDependency */,
 			);
@@ -1194,8 +1202,17 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				TargetAttributes = {
+					4B51AA5507E877C900576AB9 = {
+						DevelopmentTeam = 97V36B3QYK;
+					};
+				};
+			};
 			buildConfigurationList = 4B6A86F5086DB1EA00BFAE69 /* Build configuration list for PBXProject "CocoaGlk" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -1492,6 +1509,11 @@
 			target = 4B51AA5507E877C900576AB9 /* GlkClient */;
 			targetProxy = 4BFA1CA707F8A3120068E16A /* PBXContainerItemProxy */;
 		};
+		FFF22E6218FD7366002BB61E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B3C3B780F3DAB850066A760 /* git */;
+			targetProxy = FFF22E6118FD7366002BB61E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1536,18 +1558,19 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "";
-				INSTALL_PATH = /usr/local/bin;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				HEADER_SEARCH_PATHS = ./GlkClient;
+				INFOPLIST_FILE = "git-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = git;
 			};
 			name = Development;
@@ -1558,17 +1581,18 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PREFIX_HEADER = "";
-				INSTALL_PATH = /usr/local/bin;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				HEADER_SEARCH_PATHS = ./GlkClient;
+				INFOPLIST_FILE = "git-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = git;
 				ZERO_LINK = NO;
 			};
@@ -1578,17 +1602,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PREFIX_HEADER = "";
-				INSTALL_PATH = /usr/local/bin;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				HEADER_SEARCH_PATHS = ./GlkClient;
+				INFOPLIST_FILE = "git-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = git;
 			};
 			name = Default;
@@ -1596,19 +1621,16 @@
 		4B6A86E2086DB1E900BFAE69 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkView-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1621,11 +1643,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = GlkView;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
+				WARNING_CFLAGS = "-Wno-deprecated-declarations";
 				ZERO_LINK = NO;
 			};
 			name = Development;
@@ -1633,16 +1651,13 @@
 		4B6A86E3086DB1E900BFAE69 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkView-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1655,11 +1670,7 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = GlkView;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
+				WARNING_CFLAGS = "-Wno-deprecated-declarations";
 				ZERO_LINK = NO;
 			};
 			name = Deployment;
@@ -1667,18 +1678,12 @@
 		4B6A86E4086DB1E900BFAE69 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkView-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1691,29 +1696,25 @@
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = GlkView;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
+				WARNING_CFLAGS = "-Wno-deprecated-declarations";
 			};
 			name = Default;
 		};
 		4B6A86E6086DB1E900BFAE69 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GlkClient-Info.plist";
-				INSTALL_PATH = "@executable_path/../../../../Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1727,11 +1728,6 @@
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = GlkClient;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				ZERO_LINK = NO;
 			};
 			name = Development;
@@ -1739,15 +1735,15 @@
 		4B6A86E7086DB1E900BFAE69 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GlkClient-Info.plist";
-				INSTALL_PATH = "@executable_path/../../../../Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1761,11 +1757,6 @@
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = GlkClient;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				ZERO_LINK = NO;
 			};
 			name = Deployment;
@@ -1773,13 +1764,14 @@
 		4B6A86E8086DB1E900BFAE69 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "GlkClient-Info.plist";
-				INSTALL_PATH = "@executable_path/../../../../Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1793,11 +1785,6 @@
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = GlkClient;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 			};
 			name = Default;
 		};
@@ -1806,7 +1793,6 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1836,7 +1822,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -1890,12 +1875,12 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				INSTALL_PATH = /usr/local/bin;
+				INFOPLIST_FILE = "glulxe-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1910,6 +1895,7 @@
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
+					"-Wno-unused-function",
 				);
 				ZERO_LINK = NO;
 			};
@@ -1919,10 +1905,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				INSTALL_PATH = /usr/local/bin;
+				INFOPLIST_FILE = "glulxe-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1937,6 +1923,7 @@
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
+					"-Wno-unused-function",
 				);
 				ZERO_LINK = NO;
 			};
@@ -1947,7 +1934,8 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				INSTALL_PATH = /usr/local/bin;
+				INFOPLIST_FILE = "glulxe-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1962,6 +1950,7 @@
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
+					"-Wno-unused-function",
 				);
 			};
 			name = Default;
@@ -1969,16 +1958,13 @@
 		4B6A86F2086DB1EA00BFAE69 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CocoaGlk_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
 				PRODUCT_NAME = CocoaGlk;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
@@ -1988,14 +1974,12 @@
 		4B6A86F3086DB1EA00BFAE69 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CocoaGlk_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
 				PRODUCT_NAME = CocoaGlk;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
@@ -2005,12 +1989,11 @@
 		4B6A86F4086DB1EA00BFAE69 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CocoaGlk_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
 				PRODUCT_NAME = CocoaGlk;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2019,39 +2002,75 @@
 		4B6A86F6086DB1EA00BFAE69 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
-				GCC_VERSION = 4.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
-				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+				SEPARATE_STRIP = YES;
+				SKIP_INSTALL = YES;
 			};
 			name = Development;
 		};
 		4B6A86F7086DB1EA00BFAE69 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					ppc,
-				);
-				GCC_VERSION = 4.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
-				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+				SEPARATE_STRIP = YES;
+				SKIP_INSTALL = YES;
 			};
 			name = Deployment;
 		};
 		4B6A86F8086DB1EA00BFAE69 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				GCC_VERSION = 4.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.2;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
-				"SDKROOT[arch=ppc]" = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+				SEPARATE_STRIP = YES;
+				SKIP_INSTALL = YES;
 			};
 			name = Default;
 		};
@@ -2073,7 +2092,6 @@
 					AppKit,
 				);
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = imagetest;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -2102,7 +2120,6 @@
 					AppKit,
 				);
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = imagetest;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -2130,7 +2147,6 @@
 					AppKit,
 				);
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = imagetest;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -2145,27 +2161,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "GlkSound-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = GlkSound;
 			};
 			name = Development;
@@ -2174,14 +2188,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -2193,7 +2205,6 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = GlkSound;
 				ZERO_LINK = NO;
 			};
@@ -2203,12 +2214,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -2220,7 +2229,6 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = GlkSound;
 			};
 			name = Default;

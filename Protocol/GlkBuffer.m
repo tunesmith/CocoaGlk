@@ -251,7 +251,7 @@ static NSString* stringFromOp(NSArray* op) {
 // = NSCopying =
 
 - (id) copyWithZone: (NSZone*) zone {
-	GlkBuffer* copy = [[GlkBuffer allocWithZone: zone] init];
+	GlkBuffer* copy = [[GlkBuffer alloc] init];
 	
 	[copy->operations release];
 	copy->operations = [[NSMutableArray alloc] initWithArray: operations

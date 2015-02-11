@@ -116,13 +116,13 @@ void cocoaglk_start(int argv, const char** argc) {
 	if (hubCookie) hubCookieS = [NSString stringWithUTF8String: hubCookie];
 	if (sessionCookie) sessionCookieS = [NSString stringWithUTF8String: sessionCookie];
 	
-	NSString* connectionName = [NSString stringWithFormat: @"CocoaGlk-%@", hubNameS];
+	NSString* connectionName = [NSString stringWithFormat: @"97V36B3QYK.com.inform7.inform-compiler.CocoaGlk-%@", hubNameS];
 	
 	NSConnection* remoteConnection = [NSConnection connectionWithRegisteredName: connectionName
 																		   host: nil];
 	
 	if (remoteConnection == nil) {
-		NSLog(@"Failed to connect to Glk hub with name %@", hubName);
+		NSLog(@"Failed to connect to Glk hub with name %@", hubNameS);
 		NSLog(@"Unable to open display. Quitting");
 		exit(1);
 	}
@@ -192,10 +192,11 @@ void cocoaglk_warning(char* warningText) {
 													   length: strlen(warningText)
 													 encoding: NSISOLatin1StringEncoding];
 	[cocoaglk_session showWarning: warningString];
+    [warningString release];
 }
 
 // Reports an error to the server, then quits
-void cocoaglk_error(char* errorText) {
+void cocoaglk_error(const char* errorText) {
 #if COCOAGLK_TRACE
 	NSLog(@"TRACE: cocoaglk_error(\"%s\")", errorText);
 #endif
@@ -238,6 +239,7 @@ void cocoaglk_log(char* logText) {
 												   length: strlen(logText)
 												 encoding: NSISOLatin1StringEncoding];
 	[cocoaglk_session logMessage: logString];
+    [logString release];
 }
 
 // Logs a message with priority to the server
@@ -253,6 +255,7 @@ void cocoaglk_log_ex(char* logText, int priority) {
 												 encoding: NSISOLatin1StringEncoding];
 	[cocoaglk_session logMessage: logString
 					withPriority: priority];
+    [logString release];
 }
 
 // Flushes the buffer

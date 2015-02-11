@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>GlkClient.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>uk.co.logicalshift.CocoaGlk.GlkView</string>
+	<string>com.inform7.inform-compiler</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
